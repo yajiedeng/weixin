@@ -19,7 +19,7 @@ return [
     'app_id'  => env('WECHAT_APPID', 'wxe52d47b93aeae351'),         // AppID
     'secret'  => env('WECHAT_SECRET', '3d779bed0bc68ec450749709e9c4324d'),     // AppSecret
     'token'   => env('WECHAT_TOKEN', 'mydadaotest'),          // Token
-    'aes_key' => env('WECHAT_AES_KEY', ''),                    // EncodingAESKey
+    'aes_key' => env('WECHAT_AES_KEY', 'qzoX56ojEkSzFR9yDlCLii14mAVKLSnHTW2ZwHwL3Sq'),                    // EncodingAESKey
 
     /**
      * 开放平台第三方平台配置信息
