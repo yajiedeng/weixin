@@ -16,7 +16,7 @@ class WechatController extends Controller
         $openId = $message['FromUserName'];
 //        $service = $app->customer_service;
         $text = new Text('hello');
-        return $app->customer_service->message($text)->to($openId)->send();
+        $app->customer_service->message($text)->to($openId)->send();
         return $app->server->serve();
     }
 }
