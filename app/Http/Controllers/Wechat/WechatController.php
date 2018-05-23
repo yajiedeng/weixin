@@ -12,11 +12,11 @@ class WechatController extends Controller
     public function serve()
     {
         $app = app('wechat.official_account');
-        $message = $app->server->getMessage();
-        $openId = $message['FromUserName'];
-//        $service = $app->customer_service;
-        $text = new Text('hello');
-        $app->customer_service->message($text)->to($openId)->send();
+        $app->server->push(function ($message) {
+            // $message['FromUserName'] // 用户的 openid
+            // $message['MsgType'] // 消息类型：event, text....
+            return "hello";
+        });
         return $app->server->serve();
     }
 }
