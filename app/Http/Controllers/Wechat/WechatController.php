@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wechat;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Kernel\Messages\Text;
 
 class WechatController extends Controller
 {
@@ -11,6 +12,12 @@ class WechatController extends Controller
     public function serve()
     {
         $app = app('wechat.official_account');
+
+        $message = $app->server->getMessage();
+        $openId = $message['FromUserName'];
+        $text = new Text('hello');
+        return $app->customer_service->message($text)->to($openId)->send();
+
         $app->server->push(function ($message) {
             // $message['FromUserName'] // 用户的 openid
             // $message['MsgType'] // 消息类型：event, text....
