@@ -94,10 +94,10 @@ return [
      */
      'mini_program' => [
          'default' => [
-             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
-             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
-             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
+             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx77fbe29bd53bc39b'),
+             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'a6dbc6066d58bfc0bc1581daff21d773'),
+             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', 'mydadaotest'),
+             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', 'Ctz5oazonDlsbRLa92AIWrmjBK6UwFOfjgWWermZpOz'),
          ],
      ],
 
