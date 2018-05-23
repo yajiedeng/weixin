@@ -15,7 +15,6 @@ class MiniAppController extends Controller
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
         $text = new Text('hello');
-        $result = $app->customer_service->message($text)->to($openId)->send();
-        return $result;
+        return $app->customer_service->message($text)->to($openId)->send();
     }
 }
