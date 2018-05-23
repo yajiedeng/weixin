@@ -16,7 +16,7 @@ class WechatController extends Controller
 //        $service = $app->customer_service;
         $text = new Text('您好！overtrue。');
 
-        return $app->customer_service->message($text)->to($openId);
-//        return $app->server->serve();
+        $app->customer_service->message($text)->to($openId)->send();
+        return $app->server->serve();
     }
 }
