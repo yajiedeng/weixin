@@ -15,6 +15,14 @@ class MiniAppController extends Controller
 
         $message = $app->server->getMessage();
 
+        $app->server->push(function ($message) {
+            // $message['FromUserName'] // 用户的 openid
+            // $message['MsgType'] // 消息类型：event, text....
+            return "hello";
+        });
+
+        return $app->server->serve();
+
         if(isset($message)){
             $openId = $message['FromUserName'];
             $text = new Text('hello');
