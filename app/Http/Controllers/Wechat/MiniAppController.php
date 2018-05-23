@@ -13,8 +13,6 @@ class MiniAppController extends Controller
     {
         $app = app('wechat.mini_program');
 
-        $app = app('wechat.official_account');
-
         $message = $app->server->getMessage();
 
         if(isset($message)){
@@ -28,12 +26,6 @@ class MiniAppController extends Controller
                 return "hello";
             });
         }
-
         return $app->server->serve();
-
-
-
-
-
     }
 }
