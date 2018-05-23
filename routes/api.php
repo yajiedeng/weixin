@@ -16,4 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::any('/wechat','Wechat\WechatController@serve');
+
+
+//微信路由组
+Route::group(['namespace' => 'Wechat'], function(){
+    Route::any('/wechat','WechatController@serve');
+    Route::any('/miniapp','MiniAppController@serve');
+});
