@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Log;
+use EasyWeChat\Kernel\Messages\Text;
 
 class WechatController extends Controller
 {
     public function serve()
     {
         $app = app('wechat.official_account');
-        $service = $app->customer_service;
-        Log::info('miniapp. start . data .');
-        $app->server->push(function($message){
-            return "666";
-        });
+//        $message = $app->server->getMessage();
+//        $openId = $message['FromUserName'];
+//        $service = $app->customer_service;
+        $text = new Text('您好！overtrue。');
+
         return $app->server->serve();
-        Log::info('miniapp. over');
     }
 }
