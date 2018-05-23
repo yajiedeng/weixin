@@ -10,7 +10,7 @@ class WechatController extends Controller
 {
     public function serve()
     {
-        $app = app('wechat.official_account');
+        $app = app('wechat');
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
 //        $service = $app->customer_service;
