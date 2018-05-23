@@ -97,7 +97,7 @@ return [
              'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx77fbe29bd53bc39b'),
              'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'a6dbc6066d58bfc0bc1581daff21d773'),
              'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', 'miniapp'),
-             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', '07RdvfViUU9so2kHH62BkS8QWfuKbsmz8P0DkiTRU0U'),
+             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', 'G89w32CpNvCaneKvpiwpizRWO0BTqzo5QOt3qvZbpgm'),
          ],
      ],
 
