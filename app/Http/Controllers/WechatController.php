@@ -11,7 +11,7 @@ class WechatController extends Controller
     {
         $app = app('wechat.official_account');
         $service = $app->customer_service;
-        Log::info('miniapp. start . data .'.$service);
+        Log::info('miniapp. start . data .');
         $app->server->push(function($message){
             return "666";
         });
