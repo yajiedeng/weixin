@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//前台路由组
+Route::group(['namespace' => 'Dadao'], function(){
+    Route::get('/zhima',"ZhimaController@zhima");
+});
