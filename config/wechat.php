@@ -96,7 +96,7 @@ return [
          'default' => [
              'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx77fbe29bd53bc39b'),
              'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'a6dbc6066d58bfc0bc1581daff21d773'),
-             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', 'mydadaotest'),
+             'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', 'miniapp'),
              'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', 'Ctz5oazonDlsbRLa92AIWrmjBK6UwFOfjgWWermZpOz'),
          ],
      ],
