@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Wechat;
 
 use Illuminate\Http\Request;
-use Log;
-use EasyWeChat\Kernel\Messages\Text;
+use App\Http\Controllers\Controller;
 
-class WechatController extends Controller
+class MiniAppController extends Controller
 {
-    //公众号 接收消息&事件地址
+    //小程序 客服接收消息&事件地址
     public function serve()
     {
-        $app = app('wechat.official_account');
+        $app = app('wechat.mini_program');
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
 //        $service = $app->customer_service;
