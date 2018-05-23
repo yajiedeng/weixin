@@ -14,6 +14,9 @@ class MiniAppController extends Controller
         $app = app('wechat.mini_program');
 
         $message = $app->server->getMessage();
+        $openId = $message['FromUserName'];
+        $text = new Text('hello');
+        $app->customer_service->message($text)->to($openId)->send();
 
         $app->server->push(function ($message) {
             // $message['FromUserName'] // 用户的 openid
