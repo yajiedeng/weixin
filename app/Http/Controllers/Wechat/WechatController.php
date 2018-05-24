@@ -9,12 +9,11 @@ use EasyWeChat\Kernel\Messages\Text;
 use EasyWeChat\Kernel\Messages\Image;
 use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
-use App\Http\Controllers\Wechat\MessageController;
 
 class WechatController extends Controller
 {
     public $app;
-    public function __construct(Request $request)
+    public function __construct()
     {
         //初始化
         $this->app = app('wechat.official_account');
@@ -22,9 +21,9 @@ class WechatController extends Controller
 
     public function serve(Request $request)
     {
+        //请求方式
         $method = $request->method();
-        $app = $this->service_app;
-
+        $app = $this->app;
         if($method == "GET"){
             return $app->server->serve();
         }else{
