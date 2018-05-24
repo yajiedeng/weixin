@@ -23,6 +23,7 @@ class ServiceController extends WechatController
         $reg_url = config('wechat.reg_url');
 
         if($method == "GET"){
+            $app->server->push();
             return $app->server->serve();
         }else{
             //判断事件类型
