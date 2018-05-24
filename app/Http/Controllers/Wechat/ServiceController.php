@@ -19,6 +19,8 @@ class ServiceController extends WechatController
 
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
+        $current_url = getUrl();
+        $reg_url = config('wechat.reg_url');
 
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
@@ -27,8 +29,8 @@ class ServiceController extends WechatController
                     new NewsItem([
                         'title'       => "新用户注册立即送",
                         'description' => '现在新用户注册就有大礼包相送，机会不等人，还不赶快来~',
-                        'url'         => $this->current_url."/images/dadao.jpg",
-                        'image'       => $this->current_url."/images/dadao.jpg",
+                        'url'         => $reg_url,
+                        'image'       => $current_url."/images/dadao.jpg",
                     ]),
                 ];
                 $news = new News($items);
