@@ -56,5 +56,19 @@ function responce($code='200',$msg='ok',$result='')
         'msg'  => (string)$msg,
         'data' => (string)$result
     ];
+    if($result == null){
+        unset($data['data']);
+    }
     return $data;
+}
+
+
+/*
+ * 获取当前域名
+ * */
+
+function getUrl()
+{
+    $url = url()->previous();
+    return $url;
 }

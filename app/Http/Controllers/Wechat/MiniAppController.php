@@ -50,7 +50,9 @@ class MiniAppController extends Controller
             responce('502','The server rejected your request');
         }
 
+        //用户id
         $user_id = $request->input('user_id');
+        //用户登陆code
         $code = $request->input('code');
 
         $res = $app->auth->session($code);
