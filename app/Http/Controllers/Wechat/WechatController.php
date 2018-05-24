@@ -99,9 +99,14 @@ class WechatController extends Controller
         $message = $app->server->getMessage();
 
         $keywords = $message['Content'];//接收关键字
-
+        $content = DB::table('wx_message')->where('keyword',$keywords)->first();
+        if($content){
+            $content = $content->content;
+        }else{
+            $content = '';
+        }
         $openId = $message['FromUserName'];
-        $message = new Text('Hello world!');
+        $message = new Text($content);
         $app->customer_service->message($message)->to($openId)->send();
         return $app->server->serve();
     }
