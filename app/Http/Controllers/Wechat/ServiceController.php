@@ -33,7 +33,7 @@ class ServiceController extends WechatController
         $resmsg = new MessageController();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            $resmsg->event();
+            MessageController::event();
         }elseif($message['MsgType'] == 'text'){//文本消息
             $this->text();
         }elseif($message['MsgType'] == 'image'){//图片消息
