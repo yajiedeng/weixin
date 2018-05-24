@@ -9,6 +9,7 @@ use EasyWeChat\Kernel\Messages\Text;
 use EasyWeChat\Kernel\Messages\Image;
 use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
+use App\Http\Controllers\Wechat\MessageController;
 
 class ServiceController extends WechatController
 {
@@ -29,9 +30,10 @@ class ServiceController extends WechatController
     {
         $app = $this->service_app;
         $message = $app->server->getMessage();
+        $resmsg = new MessageController();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            $this->event();
+            $resmsg->event();
         }elseif($message['MsgType'] == 'text'){//文本消息
             $this->text();
         }elseif($message['MsgType'] == 'image'){//图片消息
