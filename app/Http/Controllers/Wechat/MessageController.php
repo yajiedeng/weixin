@@ -49,7 +49,7 @@ class MessageController extends Controller
                 'title'       => "新用户注册立即送",
                 'description' => '现在新用户注册就有大礼包相送，机会不等人，还不赶快来~',
                 'url'         => $this->current_url."/images/dadao.jpg",
-                'image'       => "https://".$_SERVER['HTTP_HOST']."/images/dadao.jpg",
+                'image'       => $this->current_url."/images/dadao.jpg",
             ]),
         ];
         $news = new News($items);

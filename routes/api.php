@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //微信路由组
 Route::group(['namespace' => 'Wechat'], function(){
-    Route::any('/wechat','WechatController@serve');
+    Route::any('/wechat','ServiceController@serve');
     Route::any('/miniapp','MiniAppController@serve');
     Route::post('/openid/get','MiniAppController@getOpenid');
 });

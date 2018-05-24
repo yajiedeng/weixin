@@ -5,24 +5,13 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class WechatController extends Controller
+class ServiceController extends WechatController
 {
-    private $method;
-    public $service_app;
-    public $mini_app;
-    public function __construct(Request $request)
-    {
-        //获取请求方式
-        $this->method = $request->method();
-        //初始化
-        $this->service_app = app('wechat_test.official_account');
-        $this->mini_app = app('wechat_test.mini_program');
-    }
-    public function serve()
+    public function serve(Request $request)
     {
         //请求方式
-        $method = $this->method;
-        $app = $this->app;
+        $method = $request->method();
+        $app = $this->service_app;
         if($method == "GET"){
             return $app->server->serve();
         }elseif($method == "POST"){
@@ -33,7 +22,8 @@ class WechatController extends Controller
     }
 
     public function message(){
-        $message = $this->app->server->getMessage();
+        $app = $this->service_app;
+        $message = $app->server->getMessage();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
             $this->event();
