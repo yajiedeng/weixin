@@ -17,10 +17,6 @@ class ServiceController extends WechatController
     {
         $method = $request->method();
         $app = $this->service_app;
-        $message = $app->server->getMessage();
-        $openId = $message['FromUserName'];
-        $current_url = getUrl();
-        $reg_url = config('wechat.reg_url');
 
         if($method == "GET"){
             $app->server->push(function ($message){
@@ -28,6 +24,10 @@ class ServiceController extends WechatController
             });
             return $app->server->serve();
         }else{
+            $message = $app->server->getMessage();
+            $openId = $message['FromUserName'];
+            $current_url = getUrl();
+            $reg_url = config('wechat.reg_url');
             //判断事件类型
             if($message['MsgType'] == 'event'){//事件消息
                 if($message['Event'] == 'subscribe'){
