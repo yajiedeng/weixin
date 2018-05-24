@@ -57,7 +57,6 @@ class WechatController extends Controller
         }
     }
 
-
     /*
      * 处理事件推送消息
      * */
@@ -78,21 +77,12 @@ class WechatController extends Controller
                 ]),
             ];
             $news = new News($items);
-            $content = "亲爱的“稻米”，终于等到你！
-燃油车大众polo上线，芝麻信用免押金租车。
-详情请点击：马上用车—免押金及费用 查看
-
-回复以下数字，还可get其它相关内容：  
-【1】收费标准 
-【2】还车区域 
-【3】产生违章 
-【4】物品遗失 
-【5】事故处理  
-【6】免除押金
-
-百里加急客服电话：400-616-6161
-
- ";
+            $content = DB::table('wx_message')->where('keyword','subscribe')->first();
+            if($content){
+                $content = $content->content;
+            }else{
+                $content = '';
+            }
             $message = new Text($content);
             $app->customer_service->message($message)->to($openId)->send();
             $app->customer_service->message($news)->to($openId)->send();
@@ -107,6 +97,9 @@ class WechatController extends Controller
     {
         $app = $this->app;
         $message = $app->server->getMessage();
+
+        $keywords = $message['Content'];//接收关键字
+
         $openId = $message['FromUserName'];
         $message = new Text('Hello world!');
         $app->customer_service->message($message)->to($openId)->send();

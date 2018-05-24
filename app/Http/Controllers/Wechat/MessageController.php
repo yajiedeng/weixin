@@ -15,9 +15,9 @@ class MessageController extends WechatController
     /*
      * 处理事件推送消息
      * */
-    public static function event()
+    public function event()
     {
-        $app = app('wechat.official_account');
+        $app = $this->service_app;
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
         $current_url = getUrl();

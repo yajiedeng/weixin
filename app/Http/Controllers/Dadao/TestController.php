@@ -5,24 +5,21 @@ namespace App\Http\Controllers\Dadao;
 use App\Http\Controllers\Wechat\WechatController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Message;
+use Illuminate\Support\Facades\DB;
 
-class TestController extends WechatController
+class TestController extends Controller
 {
     public function test(Request $request){
-        $app = $this->service_app;
-        dump($app);
-        $url = getUrl();
-        echo $url;
 
-        echo "<br/>";
-
-        echo "<img src='".$url."/images/dadao.jpg'>";
-
+        $data = DB::table('wx_message')->where('keyword',16)->first();
+        if($data){
+            dump($data);
+        }else{
+            return "error";
+        }
 
 
-
-        $url = $request->url();
-        echo $url;
 
         die;
         $re = $request->method();
