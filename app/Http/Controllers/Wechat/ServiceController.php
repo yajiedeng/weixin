@@ -28,9 +28,10 @@ class ServiceController extends WechatController
     public function message(){
         $app = $this->service_app;
         $message = $app->server->getMessage();
+        $Message = new MessageController;
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            $this->event();
+            $Message->event();
         }elseif($message['MsgType'] == 'text'){//文本消息
 
         }elseif($message['MsgType'] == 'image'){//图片消息
