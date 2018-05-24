@@ -13,14 +13,12 @@ class ServiceController extends WechatController
         //请求方式
         $method = $request->method();
         $app = $this->service_app;
-        DB::table('test')->insert(['name'=>'111']);
         if($method == "GET"){
             $app->server->push(function($message){
                 return "欢迎关注 overtrue！";
             });
             return $app->server->serve();
         }elseif($method == "POST"){
-            DB::table('test')->insert(['name'=>'222']);
             $this->messgae();
         }else{
             return responce(404,'not found');
