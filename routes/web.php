@@ -17,4 +17,6 @@ Route::get('/', function () {
 //前台路由组
 Route::group(['namespace' => 'Dadao'], function(){
     Route::get('/zhima',"ZhimaController@zhima");
+    Route::get('test',"TestController@test");
+    Route::post('test',"TestController@test");
 });
