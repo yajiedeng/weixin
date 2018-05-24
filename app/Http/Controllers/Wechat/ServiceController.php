@@ -34,6 +34,8 @@ class ServiceController extends WechatController
                     ]),
                 ];
                 $news = new News($items);
+                $message = new Text('Hello world!');
+                $app->customer_service->message($message)->to($openId)->send();
                 $app->customer_service->message($news)->to($openId)->send();
                 return $app->server->serve();
             }
