@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wechat;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends WechatController
 {
@@ -12,9 +13,11 @@ class ServiceController extends WechatController
         //请求方式
         $method = $request->method();
         $app = $this->service_app;
+        DB::table('test')->insert(['name'=>$method]);
         if($method == "GET"){
             return $app->server->serve();
         }elseif($method == "POST"){
+            DB::table('test')->insert(['name'=>$method.'222']);
             $this->messgae();
         }else{
             return responce(404,'not found');
