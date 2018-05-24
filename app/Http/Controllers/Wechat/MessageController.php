@@ -13,7 +13,7 @@ use EasyWeChat\Kernel\Messages\NewsItem;
 class MessageController extends WechatController
 {
     /*
-     * 事件消息处理
+     * 处理事件推送消息
      * */
     public function event()
     {
@@ -22,7 +22,6 @@ class MessageController extends WechatController
         $openId = $message['FromUserName'];
         $current_url = getUrl();
         $reg_url = config('wechat_parameter.reg_url');
-
         if($message['Event'] == 'subscribe'){
             $items = [
                 new NewsItem([
@@ -53,16 +52,6 @@ class MessageController extends WechatController
             $app->customer_service->message($news)->to($openId)->send();
             return $app->server->serve();
         }
-
-
-
-//        if($message['Event'] == 'subscribe'){//关注事件
-//            $this->subscribe();
-//        }elseif($message['Event'] == 'CLICK'){//点击自定义菜单事件
-//
-//        }elseif($message['Event'] == 'SCAN'){//扫描二维码事件
-//
-//        }
     }
 
     /*
