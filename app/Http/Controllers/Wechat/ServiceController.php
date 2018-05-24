@@ -8,18 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceController extends WechatController
 {
+    public $app;
     public function serve(Request $request)
     {
-        //请求方式
-        $method = $request->method();
         $app = $this->service_app;
         $app->server->push(function($message){
             $Message = new MessageController();
+            $openId = $message['FromUserName'];
             //判断事件类型
             if($message['MsgType'] == 'event'){//事件消息
-                $Message->event();
+                $items = [
+                    new NewsItem([
+                        'title'       => "新用户注册立即送",
+                        'description' => '现在新用户注册就有大礼包相送，机会不等人，还不赶快来~',
+                        'url'         => $this->current_url."/images/dadao.jpg",
+                        'image'       => $this->current_url."/images/dadao.jpg",
+                    ]),
+                ];
+                $news = new News($items);
+                $this->app->customer_service->message($news)->to($openId)->send();
             }elseif($message['MsgType'] == 'text'){//文本消息
-
+                $message = new Text('Hello world!');
+                $result = $this->app->customer_service->message($message)->to($openId)->send();
             }elseif($message['MsgType'] == 'image'){//图片消息
 
             }elseif($message['MsgType'] == 'voice'){//语音消息
