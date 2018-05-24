@@ -8,9 +8,11 @@ use App\Http\Controllers\Controller;
 class TestController extends Controller
 {
     public function test(Request $request){
-
-        $res = $request->all();
-        dump($res);
-
+        $re = $request->method();
+        if($re == "POST"){
+            return "this is post method";
+        }elseif ($re == "GET") {
+            return "this is get method";
+        }
     }
 }
