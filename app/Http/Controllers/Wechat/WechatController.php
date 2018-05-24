@@ -35,7 +35,6 @@ class WechatController extends Controller
     {
         $app = $this->app;
         $message = $app->server->getMessage();
-        $resmsg = new MessageController();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
             $this->event();
