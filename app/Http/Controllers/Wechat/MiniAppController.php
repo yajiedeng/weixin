@@ -6,23 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
 
-class MiniAppController extends Controller
+class MiniAppController extends WechatController
 {
-    private $method;
     private $app;
     public function __construct(Request $request)
     {
-        //获取请求方式
-        $this->method = $request->method();
         //初始化
-        $this->app = app('wechat.mini_program');
+        $this->app = $this->mini_app;
     }
 
     //小程序 客服接收消息&事件地址
     public function serve(Request $request){
         $app = $this->app;
         //获取请求方式
-        $method = $this->method;
+        $method = $request->method();
         if($method == "POST"){//接收用户回复
             //回复内容
             $content = config('message.miniapp_zhima');
@@ -44,7 +41,7 @@ class MiniAppController extends Controller
 
     //小程序用户获取openid
     public function getOpenid(Request $request){
-        $method = $this->method;
+        $method = $request->method();
         $app = $this->app;
         if($method != "POST"){
             responce('502','The server rejected your request');
