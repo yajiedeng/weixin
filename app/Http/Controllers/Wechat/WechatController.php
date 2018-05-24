@@ -11,7 +11,7 @@ use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
 use App\Http\Controllers\Wechat\MessageController;
 
-class ServiceController extends WechatController
+class WechatController extends Controller
 {
     public $app;
     public function __construct(Request $request)
