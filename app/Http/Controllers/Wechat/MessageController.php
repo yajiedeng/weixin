@@ -54,6 +54,5 @@ class MessageController extends Controller
         ];
         $news = new News($items);
         $this->app->customer_service->message($news)->to($openId)->send();
-        return $this->app->server->serve();
     }
 }
