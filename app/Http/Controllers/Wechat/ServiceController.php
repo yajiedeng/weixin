@@ -14,6 +14,12 @@ use App\Http\Controllers\Wechat\MessageController;
 class ServiceController extends WechatController
 {
     public $app;
+    public function __construct(Request $request)
+    {
+        //初始化
+        $this->app = app('wechat.official_account');
+    }
+
     public function serve(Request $request)
     {
         $method = $request->method();
@@ -28,12 +34,12 @@ class ServiceController extends WechatController
 
     public function responseMsg()
     {
-        $app = $this->service_app;
+        $app = $this->app;
         $message = $app->server->getMessage();
         $resmsg = new MessageController();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            MessageController::event();
+            $this->event();
         }elseif($message['MsgType'] == 'text'){//文本消息
             $this->text();
         }elseif($message['MsgType'] == 'image'){//图片消息
@@ -59,7 +65,7 @@ class ServiceController extends WechatController
      * */
     public function event()
     {
-        $app = $this->service_app;
+        $app = $this->app;
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
         $current_url = getUrl();
@@ -101,7 +107,7 @@ class ServiceController extends WechatController
      * */
     public function text()
     {
-        $app = $this->service_app;
+        $app = $this->app;
         $message = $app->server->getMessage();
         $openId = $message['FromUserName'];
         $message = new Text('Hello world!');
