@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use EasyWeChat\Kernel\Messages\Text;
+use EasyWeChat\Kernel\Messages\Image;
+use EasyWeChat\Kernel\Messages\News;
+use EasyWeChat\Kernel\Messages\NewsItem;
 
 class ServiceController extends WechatController
 {
