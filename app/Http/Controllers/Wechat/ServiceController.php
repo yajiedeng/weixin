@@ -32,7 +32,6 @@ class ServiceController extends WechatController
         $openId = $message['FromUserName'];
         $current_url = getUrl();
         $reg_url = config('wechat_parameter.reg_url');
-        $Message = new MessageController();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
             if($message['Event'] == 'subscribe'){
