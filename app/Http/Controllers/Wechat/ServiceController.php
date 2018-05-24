@@ -19,7 +19,9 @@ class ServiceController extends WechatController
         $app = $this->service_app;
 
         if($method == "GET"){
-            $app->server->push();
+            $app->server->push(function ($message){
+                return "";
+            });
             return $app->server->serve();
         }else{
             $message = $app->server->getMessage();
