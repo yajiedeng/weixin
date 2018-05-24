@@ -22,17 +22,19 @@ class ServiceController extends WechatController
 
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            $items = [
-                new NewsItem([
-                    'title'       => "新用户注册立即送",
-                    'description' => '现在新用户注册就有大礼包相送，机会不等人，还不赶快来~',
-                    'url'         => $this->current_url."/images/dadao.jpg",
-                    'image'       => $this->current_url."/images/dadao.jpg",
-                ]),
-            ];
-            $news = new News($items);
-            $app->customer_service->message($news)->to($openId)->send();
-            return $app->server->serve();
+            if($message['Event'] == 'subscribe'){
+                $items = [
+                    new NewsItem([
+                        'title'       => "新用户注册立即送",
+                        'description' => '现在新用户注册就有大礼包相送，机会不等人，还不赶快来~',
+                        'url'         => $this->current_url."/images/dadao.jpg",
+                        'image'       => $this->current_url."/images/dadao.jpg",
+                    ]),
+                ];
+                $news = new News($items);
+                $app->customer_service->message($news)->to($openId)->send();
+                return $app->server->serve();
+            }
         }elseif($message['MsgType'] == 'text'){//文本消息
             $message = new Text('Hello world!');
             $app->customer_service->message($message)->to($openId)->send();
