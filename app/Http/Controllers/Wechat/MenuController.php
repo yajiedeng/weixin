@@ -71,6 +71,7 @@ class MenuController extends Controller
                 ],
             ],
         ];
-        $this->app->menu->create($buttons);
+        $response = $this->app->menu->create($buttons);
+        dump($response);
     }
 }
