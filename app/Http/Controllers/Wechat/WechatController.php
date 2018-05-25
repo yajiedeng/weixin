@@ -138,4 +138,14 @@ class WechatController extends Controller
         $app->customer_service->message($news)->to($openId)->send();
         return $app->server->serve();
     }
+
+    /*
+     * 自定义菜单
+     * */
+    public function meunList()
+    {
+        $app = $this->app;
+        $list = $app->menu->list();
+        dump($list);
+    }
 }
