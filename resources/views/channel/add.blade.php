@@ -10,25 +10,30 @@
         .from{
             width:100%;
             display: flex;
-            height: 60px;
+            /*height: 60px;*/
             margin: 0 auto;
             padding:60px 0;
             background: #f5f5f5;
         }
         .from-item{
             width: auto;
-            height: 60px;
             margin: 0 auto;
             padding: 0 20px;
-            line-height: 60px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             color: #222;
             font-size: 14px;
             font-family: "Courier New", Courier, mono;
         }
+        .item{
+            height: 60px;
+            line-height: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
         .item-text{
-            width: 40px;
+            width: 60px;
+            text-align: center;
         }
         .item-input{
             width:240px;
@@ -39,15 +44,17 @@
             margin-left: 10px;
         }
         .submit{
-            width:60px;
+            width:100%;
             height: 40px;
-            margin-top:10px;
+            margin-top:15px;
             border: 0;
             background: #2ab27b;
             color: #fff;
             letter-spacing: 1px;
             margin-left:15px;
             border: 1px solid #2ab27b;
+            font-size: 18px;
+            font-weight: 600;
         }
         .img-box{
             width: 100%;
@@ -80,9 +87,14 @@
 <body>
     <div class="from">
         <div class="from-item">
-            <div class="item-text">姓名</div>
-            <input class="item-input" name="userName" type="text" placeholder="请输入渠道人员姓名" required>
-            <input class="item-input" name="vcode" type="text" placeholder="请输入验证码" required>
+            <div class="item">
+                <div class="item-text">姓名</div>
+                <input class="item-input" name="userName" type="text" placeholder="请输入渠道人员姓名" required>
+            </div>
+            <div class="item">
+                <div class="item-text">验证码</div>
+                <input class="item-input" name="vcode" type="text" placeholder="请输入验证码" required>
+            </div>
             <button class="submit" type="button">添加</button>
             {{ csrf_field() }}
         </div>
