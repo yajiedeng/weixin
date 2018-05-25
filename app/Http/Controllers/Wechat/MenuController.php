@@ -76,7 +76,7 @@ class MenuController extends Controller
     /*
      * 删除菜单
      * */
-    public function delete()
+    public function deleteMenu()
     {
         return $this->app->menu->delete(); // 全部
     }
