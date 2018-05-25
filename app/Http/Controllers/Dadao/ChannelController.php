@@ -43,7 +43,7 @@ class ChannelController extends Controller
             $app = app('wechat.official_account');
             $result = $app->qrcode->forever("db_".$lastId);
             //组装图片链接
-            $imgUrl = $this->app->qrcode->url($result['ticket']);
+            $imgUrl = $app->qrcode->url($result['ticket']);
             //将二维码链接和 ticket 存入数据库
             DB::table('channel_qrcode')->where('id',$lastId)->update(['url' => $result['url'],'ticket'=>$result['ticket'],'imgUrl'=>$imgUrl]);
             // 返回图片链接
