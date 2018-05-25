@@ -9,12 +9,13 @@ use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 use Log;
 
-class TestController extends WechatController
+class TestController extends Controller
 {
     public function test(Request $request){
 
-        $result = app(WechatController::class)->createQrCode('bd_15212');
-
+        $wechat = new WechatController();
+        dump($wechat);
+        $result = $this->createQrCode('bd_15212');
         dump($result);
         die;
 
