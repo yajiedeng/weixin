@@ -16,7 +16,7 @@ class ChannelController extends Controller
         }
     }
 
-    public function qrCode(Request $request)
+    public function doCreate(Request $request)
     {
         return responce(-1,"请输入渠道人员姓名");
         $code = config("wechat_parameter.channel_submit_code");

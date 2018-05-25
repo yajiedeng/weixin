@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Dadao'], function(){
     Route::get('/zhima',"ZhimaController@zhima");
     Route::get('/channel',"ChannelController@create");
-    Route::post('chnnel',"ChannelController@qrCode");
+    Route::post('docreate',"ChannelController@doCreate");
 });
