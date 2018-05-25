@@ -71,11 +71,19 @@ class WechatController extends Controller
             $content = $content == null ? "" : $content->content;
             $this->resposeText($content);
             //回复一条图文消息
+
+//            $news = [
+//                'title' => "新用户注册立即送",
+//                'description' => "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~",
+//                'url' => $reg_url,
+//                'image' => $current_url."/images/dadao.jpg",
+//            ];
+
             $news = new \stdClass();
             $news->title = "新用户注册立即送";
             $news->description = "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~";
             $news->url = $reg_url;
-            $news->image = $current_url."/images/dadao.jpg";
+            $news->picurl = $current_url."/images/dadao.jpg";
             $this->responseNews($news);
             return $app->server->serve();
         }
