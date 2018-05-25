@@ -79,7 +79,7 @@ class WechatController extends Controller
             $news->url = $reg_url;
             $news->picurl = $current_url."/images/dadao.jpg";
             $this->responseNews($news);
-        }elseif ($message['Event'] == 'click'){//自定义菜单点击事件
+        }elseif (strtolower($message['Event']) == 'click'){//自定义菜单点击事件
             $this->responseClick();
         }
     }
@@ -97,7 +97,7 @@ class WechatController extends Controller
     /*
      * 处理关键字回复
      * */
-    private function responseKeyword()
+    private function responseKeyword($keywords)
     {
         if(empty($keywords)){
             $msg = $this->app->server->getMessage();
