@@ -41,7 +41,6 @@ class ChannelController extends Controller
                 return responce(-1,"用户名已存在");
                 exit();
             }
-            $data['create_time'] = date("Y-m-d H:i:s",time());
             //存入数据库并获取 id 字段
             $lastId = DB::table('channel_qrcode')->insertGetId($data);
             //生成二维码
