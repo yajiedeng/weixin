@@ -12,8 +12,8 @@ use Log;
 class TestController extends Controller
 {
     public function test(Request $request){
-
-        $wechat = new WechatController();
+        $app = app('wechat.official_account');
+        $wechat = new WechatController($app);
         $result = $wechat->createQrCode('bd_15212');
         dump($result);
         die;
