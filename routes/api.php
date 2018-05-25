@@ -26,3 +26,4 @@ Route::group(['namespace' => 'Wechat'], function(){
 });
 
 Route::any('test',"Dadao\TestController@test");
+Route::any('menus',"Wechat\MenuController@menuList");
