@@ -118,6 +118,7 @@
                     shade: [0.1,'#fff'] //0.1透明度的白色背景
                 });
                 $.post("{{url('channel')}}",{userName:userName,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
+                    console.log(data);
                     if(data.code == 1){
                         qrcode = data.data;
                         $('.qrcode').attr('src',data.data);
