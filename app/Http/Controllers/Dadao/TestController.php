@@ -12,6 +12,12 @@ use Log;
 class TestController extends Controller
 {
     public function test(Request $request){
+
+        $wechat = new WechatController();
+        $result = $wechat->createQrCode('bd_15212');
+        dump($result);
+        die;
+
         $id = false;
         if($id){
             Log::info('this is id = '.$id);
