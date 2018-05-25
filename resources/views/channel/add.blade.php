@@ -100,7 +100,7 @@
     </div>
     <div class="img-box">
         <div class="img">
-            <img class="qrcode" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEd8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyTkhhc1VMNWVlWjMxMDAwMHcwN0gAAgTbOPFaAwQAAAAA" />
+            <img class="qrcode" src="" />
         </div>
         {{--<a href="" class="download">点击下载</a>--}}
     </div>
@@ -118,7 +118,7 @@
                 });
                 $.post("{{url('channel')}}",{userName:userName,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
                     if(data.code == 1){
-                        qrcode = data.resData;
+                        qrcode = data.data;
                         $('.qrcode').attr('src',data.data);
                         $('.img-box').show();
                     }else{
