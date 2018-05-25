@@ -28,3 +28,4 @@ Route::group(['namespace' => 'Wechat'], function(){
 Route::any('test',"Dadao\TestController@test");
 Route::get('menus',"Wechat\MenuController@meunList");
 Route::post('menus/add',"Wechat\MenuController@addMenu");
+Route::post('menus/delete',"Wechat\MenuController@deleteMenu");
