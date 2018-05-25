@@ -20,11 +20,6 @@ class WechatController extends Controller
         $this->app = app('wechat.official_account');
     }
 
-    public static function instance()
-    {
-        return new WechatController();
-    }
-
     public function serve(Request $request)
     {
         //请求方式

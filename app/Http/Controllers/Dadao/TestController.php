@@ -12,7 +12,7 @@ use Log;
 class TestController extends Controller
 {
     public function test(Request $request){
-        $wechat = WechatController::instance();
+        $wechat = new WechatController;
         dump($wechat);
         $result = $wechat->createQrCode('bd_15212');
         dump($result);
