@@ -20,48 +20,16 @@ class TestController extends Controller
         $news->url = $reg_url;
         $news->image = $current_url."/images/dadao.jpg";
 
-        echo $news->title;
-
-        dump($news);
+       $this->responseNews($news);
 
         die;
 
         $re = DB::table('wx_message')->insert(['keyword'=>1,'content'=>$json,'type'=>2]);
         die;
-
-
-        $std = new \stdClass();
-        $std->name = 'jack';
-        $std->age = 18;
-        $std->sex = '男';
-
-        dump($std);
-        die;
-
-        $data = DB::table('wx_message')->where('keyword',16)->first();
-        dump($data);
-        die;
-        if($data){
-            echo $data->title;
-        }else{
-            echo 'not objec';
-        }
-
-        die;
-        if($data){
-            dump($data);
-        }else{
-            return "error";
-        }
-
-
-
-        die;
-        $re = $request->method();
-        if($re == "POST"){
-            return "this is post method";
-        }elseif ($re == "GET") {
-            return "this is get method";
-        }
+    }
+    public function responseNews($news)
+    {
+        echo $news->title;
+        dump($news);
     }
 }

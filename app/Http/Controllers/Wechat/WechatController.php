@@ -67,16 +67,17 @@ class WechatController extends Controller
         $current_url = getUrl();
         $reg_url = config('wechat_parameter.reg_url');
         if($message['Event'] == 'subscribe'){//关注事件
+            $content = DB::table('wx_message')->where('keyword','subscribe')->first();
+            $content = $content == null ? "" : $content->content;
+            $this->resposeText($content);
+            //回复一条图文消息
             $news = new \stdClass();
             $news->title = "新用户注册立即送";
             $news->description = "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~";
             $news->url = $reg_url;
             $news->image = $current_url."/images/dadao.jpg";
-
-            $content = DB::table('wx_message')->where('keyword','subscribe')->first();
-            $content = $content == null ? "" : $content->content;
-            $this->resposeText($content);
             $this->responseNews($news);
+            return $app->server->serve();
         }
     }
 
@@ -116,7 +117,6 @@ class WechatController extends Controller
         $openId = $msg['FromUserName'];
         $message = new Text($content);
         $app->customer_service->message($message)->to($openId)->send();
-        return $app->server->serve();
     }
 
     /*
@@ -137,6 +137,5 @@ class WechatController extends Controller
         ];
         $news = new News($items);
         $app->customer_service->message($news)->to($openId)->send();
-        return $app->server->serve();
     }
 }
