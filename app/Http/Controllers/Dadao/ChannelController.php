@@ -15,6 +15,7 @@ class ChannelController extends Controller
             return view('channel.add');
         }else{
             $code = config("wechat_parameter.channel_submit_code");
+            echo $code;
             //接收页面参数
             $data['username'] = $request->input('userName');
             $data['vcode'] = $request->input('userName');
