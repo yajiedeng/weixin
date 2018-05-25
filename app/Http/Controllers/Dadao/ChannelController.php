@@ -13,7 +13,8 @@ class ChannelController extends Controller
         $method = $request->method();
         if($method == "GET"){
             return view('channel.add');
-        }else{
+        }elseif($method == "POST"){
+            dump('fhjdksjhfjkldslfkds');
             $code = config("wechat_parameter.channel_submit_code");
             echo $code;
             //接收页面参数
