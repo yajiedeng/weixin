@@ -14,4 +14,5 @@ return [
     'splicing_reg_url'          => 'https://invite-dev.mydadao.com/incar/dadao.html?channel_from=mydadao&channel_product=h5&scene_method=scan_code&scene_type=bd&scene_str=%s',
     //点击自定义菜单进入跳转页面
     'reg_url'          => 'https://invite-dev.mydadao.com/incar/dadao.html?channel_from=mydadao&channel_product=h5',
+    'channel_submit_code' => 'zhangyang'
 ];
