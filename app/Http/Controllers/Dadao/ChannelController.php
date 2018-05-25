@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dadao;
 use App\Http\Controllers\Wechat\WechatController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ChannelController extends Controller
 {
