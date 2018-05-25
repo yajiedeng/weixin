@@ -9,6 +9,7 @@ use EasyWeChat\Kernel\Messages\Text;
 use EasyWeChat\Kernel\Messages\Image;
 use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
+use Log;
 
 class WechatController extends Controller
 {
@@ -39,7 +40,7 @@ class WechatController extends Controller
         if($message['MsgType'] == 'event'){//事件消息
             $this->event();
         }elseif($message['MsgType'] == 'text'){//文本消息
-            $this->text();
+            $this->responseKeyword(); //由于用户回复的文本消息 应该是走关键词回复
         }elseif($message['MsgType'] == 'image'){//图片消息
 
         }elseif($message['MsgType'] == 'voice'){//语音消息
@@ -89,19 +90,19 @@ class WechatController extends Controller
     private function responseClick()
     {
         $msg = $this->app->server->getMessage();
-        $keywords = $msg['Content'];//接收关键字
-        if($keywords){
-            $this->text();
-        }
+        $keywords = $msg['EventKey'];//接收关键字
+        $this->responseKeyword($keywords);
     }
 
     /*
      * 处理关键字回复
      * */
-    private function text()
+    private function responseKeyword()
     {
-        $msg = $this->app->server->getMessage();
-        $keywords = $msg['Content'];//接收关键字
+        if(empty($keywords)){
+            $msg = $this->app->server->getMessage();
+            $keywords = $msg['Content'];//接收关键字
+        }
         $content = DB::table('wx_message')->where('keyword',$keywords)->first();
         if($content){
             //判断关键字回复类型
