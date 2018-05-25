@@ -78,16 +78,29 @@ class WechatController extends Controller
             $news->url = $reg_url;
             $news->picurl = $current_url."/images/dadao.jpg";
             $this->responseNews($news);
+        }elseif ($message['Event'] == 'CLICK'){//自定义菜单点击事件
+            $this->responseClick();
+        }
+    }
+
+    /*
+     * 自定义菜单点击事件
+     * */
+    private function responseClick()
+    {
+        $msg = $this->app->server->getMessage();
+        $keywords = $msg['Content'];//接收关键字
+        if($keywords){
+            $this->text();
         }
     }
 
     /*
      * 处理关键字回复
      * */
-    public function text()
+    private function text()
     {
-        $app = $this->app;
-        $msg = $app->server->getMessage();
+        $msg = $this->app->server->getMessage();
         $keywords = $msg['Content'];//接收关键字
         $content = DB::table('wx_message')->where('keyword',$keywords)->first();
         if($content){
@@ -108,23 +121,21 @@ class WechatController extends Controller
     /*
      * 文本消息回复
      * */
-    public function resposeText($content)
+    private function resposeText($content)
     {
-        $app = $this->app;
-        $msg = $app->server->getMessage();
+        $msg = $this->app->server->getMessage();
         $openId = $msg['FromUserName'];
         $message = new Text($content);
-        $app->customer_service->message($message)->to($openId)->send();
-        return $app->server->serve();
+        $this->app->customer_service->message($message)->to($openId)->send();
+        return $this->app->server->serve();
     }
 
     /*
      * 回复图文消息
      * */
-    public function responseNews($news)
+    private function responseNews($news)
     {
-        $app = $this->app;
-        $msg = $app->server->getMessage();
+        $msg = $this->app->server->getMessage();
         $openId = $msg['FromUserName'];
         $items = [
             new NewsItem([
@@ -135,17 +146,7 @@ class WechatController extends Controller
             ]),
         ];
         $news = new News($items);
-        $app->customer_service->message($news)->to($openId)->send();
-        return $app->server->serve();
-    }
-
-    /*
-     * 自定义菜单
-     * */
-    public function meunList()
-    {
-        $app = $this->app;
-        $list = $app->menu->list();
-        dump($list);
+        $this->app->customer_service->message($news)->to($openId)->send();
+        return $this->app->server->serve();
     }
 }
