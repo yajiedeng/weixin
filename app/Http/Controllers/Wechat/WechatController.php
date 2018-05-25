@@ -32,6 +32,9 @@ class WechatController extends Controller
         }
     }
 
+    /*
+     * 接受用户消息
+     * */
     public function responseMsg()
     {
         $app = $this->app;
@@ -129,7 +132,7 @@ class WechatController extends Controller
     /*
      * 处理关键字回复
      * */
-    public function responseKeyword($keywords)
+    public function responseKeyword($keywords= '')
     {
         if(empty($keywords)){
             $msg = $this->app->server->getMessage();
