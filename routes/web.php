@@ -21,4 +21,4 @@ Route::group(['namespace' => 'Dadao'], function(){
 //    Route::post('docreate',"ChannelController@doCreate");
 });
 
-Route::post('docreate',"Dadao/ChannelController@doCreate");
+Route::any('docreate',"Dadao/ChannelController@qr");
