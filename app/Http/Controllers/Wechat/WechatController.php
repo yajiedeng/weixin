@@ -91,16 +91,11 @@ class WechatController extends Controller
      * @ $type 二维码类型 1是临时二维码 2是永久二维码 默认是2
      * @ $sence_id 二维码参数
      * */
-    public function createQrCode($sence_id = '',$type = 2)
+    public function createQrCode($sence_id)
     {
-        if($type == 1){//生成临时二维码
-
-        }elseif($type == 2){//生成永久二维码
-            $result = $this->app->qrcode->forever($sence_id);
-            return $result;//返回数组
-        }else{
-            return false;
-        }
+        //生成永久二维码
+        $result = $this->app->qrcode->forever($sence_id);
+        return $result;//返回数组
     }
 
     /*
