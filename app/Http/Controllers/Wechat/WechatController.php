@@ -5,15 +5,11 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use EasyWeChat\Kernel\Messages\Text;
-use EasyWeChat\Kernel\Messages\Image;
-use EasyWeChat\Kernel\Messages\News;
-use EasyWeChat\Kernel\Messages\NewsItem;
 use Log;
 
 class WechatController extends Controller
 {
-    public $app;
+    private $app;
     public function __construct()
     {
         //初始化
@@ -24,9 +20,8 @@ class WechatController extends Controller
     {
         //请求方式
         $method = $request->method();
-        $app = $this->app;
         if($method == "GET"){
-            return $app->server->serve();
+            return $this->app->server->serve();
         }else{
             $this->responseMsg();
         }
@@ -35,15 +30,15 @@ class WechatController extends Controller
     /*
      * 接受用户消息
      * */
-    public function responseMsg()
+    private function responseMsg()
     {
-        $app = $this->app;
-        $message = $app->server->getMessage();
+        $msg = new MessageController();
+        $message = $this->app->server->getMessage();
         //判断事件类型
         if($message['MsgType'] == 'event'){//事件消息
-            $this->event();
+            $msg->event();
         }elseif($message['MsgType'] == 'text'){//文本消息
-            $this->responseKeyword(); //由于用户回复的文本消息 应该是走关键词回复
+            $msg->responseKeyword(); //由于用户回复的文本消息 应该是走关键词回复
         }elseif($message['MsgType'] == 'image'){//图片消息
 
         }elseif($message['MsgType'] == 'voice'){//语音消息
@@ -58,34 +53,6 @@ class WechatController extends Controller
 
         }else{//其他消息
 
-        }
-    }
-
-    /*
-     * 处理事件推送消息
-     * */
-    public function event()
-    {
-        $app = $this->app;
-        $message = $app->server->getMessage();
-        $current_url = getUrl();
-        $reg_url = config('wechat_parameter.reg_url');
-        if($message['Event'] == 'subscribe'){//关注事件
-            //回复关注后的文本消息
-            $content = DB::table('wx_message')->where('keyword','subscribe')->first();
-            $content = $content == null ? "" : $content->content;
-            $this->resposeText($content);
-            //回复一条图文消息
-            $news = new \stdClass();
-            $news->title = "新用户注册立即送";
-            $news->description = "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~";
-            $news->url = $reg_url;
-            $news->picurl = $current_url."/images/dadao.jpg";
-            $this->responseNews($news);
-        }elseif (strtolower($message['Event']) == 'click'){//自定义菜单点击事件
-            $this->responseClick();
-        }elseif (strtolower($message['Event']) == "scan"){//已关注用户扫码
-            $this->responseScan();
         }
     }
 
@@ -108,82 +75,5 @@ class WechatController extends Controller
     {
         $url = $this->app->qrcode->url($ticket);
         return $url;
-    }
-
-    /*
-     * 扫码事件处理
-     * */
-    public function responseScan()
-    {
-        $message = $this->app->server->getMessage();
-        Log::info('用户扫码',['key'=>$message['EventKey']]);
-    }
-
-    /*
-     * 自定义菜单点击事件
-     * */
-    public function responseClick()
-    {
-        $msg = $this->app->server->getMessage();
-        $keywords = $msg['EventKey'];//接收关键字
-        $this->responseKeyword($keywords);
-    }
-
-    /*
-     * 处理关键字回复
-     * */
-    public function responseKeyword($keywords= '')
-    {
-        if(empty($keywords)){
-            $msg = $this->app->server->getMessage();
-            $keywords = $msg['Content'];//接收关键字
-        }
-        Log::info('keyword = '.$keywords);
-        $content = DB::table('wx_message')->where('keyword',$keywords)->first();
-        if($content){
-            //判断关键字回复类型
-            if($content->type == 1){//文本消息
-                $content = $content->content;
-                $this->resposeText($content);
-            }elseif($content->type == 2){//图文消息
-                $content = json_decode($content->content);
-                $this->responseNews($content);
-            }
-        }else{
-            $content = '';
-            $this->resposeText($content);
-        }
-    }
-
-    /*
-     * 文本消息回复
-     * */
-    private function resposeText($content)
-    {
-        $msg = $this->app->server->getMessage();
-        $openId = $msg['FromUserName'];
-        $message = new Text($content);
-        $this->app->customer_service->message($message)->to($openId)->send();
-        return $this->app->server->serve();
-    }
-
-    /*
-     * 回复图文消息
-     * */
-    private function responseNews($news)
-    {
-        $msg = $this->app->server->getMessage();
-        $openId = $msg['FromUserName'];
-        $items = [
-            new NewsItem([
-                'title'       => $news->title,
-                'description' => $news->description,
-                'url'         => $news->url,
-                'image'       => $news->picurl,
-            ]),
-        ];
-        $news = new News($items);
-        $this->app->customer_service->message($news)->to($openId)->send();
-        return $this->app->server->serve();
     }
 }
