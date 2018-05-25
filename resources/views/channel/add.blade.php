@@ -96,7 +96,6 @@
                 <input class="item-input" name="vcode" type="text" placeholder="请输入验证码" required>
             </div>
             <button class="submit" type="button">添加</button>
-            {{ csrf_field() }}
         </div>
     </div>
     <div class="img-box">
@@ -113,13 +112,14 @@
             var qrcode = '';
             $('.submit').click(function () {
                 var userName = $("input[name=userName]").val();
+                var vcode = $("input[name=vcode]").val();
                 layer.load(1, {
                     shade: [0.1,'#fff'] //0.1透明度的白色背景
                 });
-                $.post("{{url('channel/docreate')}}",{userName:userName,'_token': '{{ csrf_token() }}'},function (data) {
+                $.post("{{url('channel')}}",{userName:userName,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
                     if(data.code == 1){
                         qrcode = data.resData;
-                        $('.qrcode').attr('src',data.resData);
+                        $('.qrcode').attr('src',data.data);
                         $('.img-box').show();
                     }else{
                         layer.msg(data.msg);
