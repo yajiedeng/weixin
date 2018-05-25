@@ -85,7 +85,6 @@ class WechatController extends Controller
             $news->url = $reg_url;
             $news->picurl = $current_url."/images/dadao.jpg";
             $this->responseNews($news);
-            return $app->server->serve();
         }
     }
 
@@ -125,6 +124,7 @@ class WechatController extends Controller
         $openId = $msg['FromUserName'];
         $message = new Text($content);
         $app->customer_service->message($message)->to($openId)->send();
+        return $app->server->serve();
     }
 
     /*
@@ -145,5 +145,6 @@ class WechatController extends Controller
         ];
         $news = new News($items);
         $app->customer_service->message($news)->to($openId)->send();
+        return $app->server->serve();
     }
 }
