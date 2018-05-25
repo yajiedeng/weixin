@@ -12,6 +12,12 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
+        $content = DB::table('wx_message')->where('keyword',1)->first();
+        $content = json_decode($content->content);
+//        dump($content);
+        echo $content->title;
+        die;
+
         $arr = [
             'title' => '收费标准',
             'description' => '计价规则',

@@ -103,7 +103,7 @@ class WechatController extends Controller
                 $this->resposeText($content);
             }elseif($content->type == 2){//图文消息
                 $content = json_decode($content);
-                $this->responseNews($content);
+                $this->responseNews($content->content);
             }
         }else{
             $content = '';
