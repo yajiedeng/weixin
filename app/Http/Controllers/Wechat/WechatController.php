@@ -81,7 +81,18 @@ class WechatController extends Controller
             $this->responseNews($news);
         }elseif (strtolower($message['Event']) == 'click'){//自定义菜单点击事件
             $this->responseClick();
+        }elseif (strtolower($message['Event']) == "scan"){//已关注用户扫码
+            $this->responseScan();
         }
+    }
+
+    /*
+     * 扫码事件处理
+     * */
+    public function responseScan()
+    {
+        $message = $this->app->server->getMessage();
+        Log::info('用户扫码',['key'=>$message['EventKey']]);
     }
 
     /*

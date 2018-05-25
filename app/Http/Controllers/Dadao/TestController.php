@@ -7,10 +7,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class TestController extends Controller
 {
     public function test(Request $request){
+        $id = false;
+        if($id){
+            Log::info('this is id = '.$id);
+        }else{
+            Log::error('发生了错误信息');
+        }
+        die;
+
         $app = app('wechat.official_account');
         $list = $app->menu->list();
         dump($list);
