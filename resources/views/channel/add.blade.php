@@ -96,6 +96,7 @@
                 <input class="item-input" name="vcode" type="text" placeholder="请输入验证码" required>
             </div>
             <button class="submit" type="button">添加</button>
+            {{ csrf_field() }}
         </div>
     </div>
     <div class="img-box">

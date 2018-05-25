@@ -11,7 +11,7 @@ class ChannelController extends Controller
     public function create(Request $request)
     {
         $method = $request->method();
-        echo $method;
+        echo $method;die;
         if($method == "GET"){
             return view('channel.add');
         }elseif($method == "POST"){
