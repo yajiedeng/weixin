@@ -17,11 +17,6 @@ class ChannelController extends Controller
         }
     }
 
-    public function qr(Request $request)
-    {
-        dump($request);
-    }
-
     public function doCreate(Request $request)
     {
         if($request->method() == "POST"){
@@ -41,6 +36,7 @@ class ChannelController extends Controller
                 return responce(-1,"用户名已存在");
                 exit();
             }
+            unset($data['vcode']);
             //存入数据库并获取 id 字段
             $lastId = DB::table('channel_qrcode')->insertGetId($data);
             //生成二维码
