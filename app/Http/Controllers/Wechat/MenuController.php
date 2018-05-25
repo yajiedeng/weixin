@@ -71,7 +71,15 @@ class MenuController extends Controller
                 ],
             ],
         ];
-        $response = $this->app->menu->create($buttons);
-        dump($response);
+        $matchRule = [
+            "tag_id" => "2",
+            "sex" => "1",
+            "country" => "中国",
+            "province" => "广东",
+            "city" => "广州",
+            "client_platform_type" => "2",
+            "language" => "zh_CN"
+        ];
+        return $this->app->menu->create($buttons,$matchRule);
     }
 }
