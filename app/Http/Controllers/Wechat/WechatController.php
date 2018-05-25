@@ -119,7 +119,7 @@ class WechatController extends Controller
     /*
      * 自定义菜单点击事件
      * */
-    private function responseClick()
+    public function responseClick()
     {
         $msg = $this->app->server->getMessage();
         $keywords = $msg['EventKey'];//接收关键字
@@ -129,7 +129,7 @@ class WechatController extends Controller
     /*
      * 处理关键字回复
      * */
-    private function responseKeyword($keywords)
+    public function responseKeyword($keywords)
     {
         if(empty($keywords)){
             $msg = $this->app->server->getMessage();
