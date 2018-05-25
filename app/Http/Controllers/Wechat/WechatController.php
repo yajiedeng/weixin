@@ -108,6 +108,15 @@ class WechatController extends Controller
     }
 
     /*
+     * 扫码事件处理
+     * */
+    public function responseScan()
+    {
+        $message = $this->app->server->getMessage();
+        Log::info('用户扫码',['key'=>$message['EventKey']]);
+    }
+
+    /*
      * 自定义菜单点击事件
      * */
     private function responseClick()
@@ -126,6 +135,7 @@ class WechatController extends Controller
             $msg = $this->app->server->getMessage();
             $keywords = $msg['Content'];//接收关键字
         }
+        Log::info('keyword = '.$keywords);
         $content = DB::table('wx_message')->where('keyword',$keywords)->first();
         if($content){
             //判断关键字回复类型
