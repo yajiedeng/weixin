@@ -19,8 +19,7 @@ class MenuController extends Controller
      * */
     public function meunList()
     {
-        $list = $this->app->menu->list();
-        dump($list);
+        return $list = $this->app->menu->list();
     }
 
     /*
@@ -72,5 +71,13 @@ class MenuController extends Controller
             ],
         ];
         return $this->app->menu->create($buttons);
+    }
+
+    /*
+     * 删除菜单
+     * */
+    public function delete()
+    {
+        return $this->app->menu->delete(); // 全部
     }
 }
