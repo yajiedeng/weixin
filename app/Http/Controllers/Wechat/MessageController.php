@@ -9,7 +9,7 @@ use EasyWeChat\Kernel\Messages\Image;
 use EasyWeChat\Kernel\Messages\News;
 use EasyWeChat\Kernel\Messages\NewsItem;
 use Illuminate\Support\Facades\DB;
-use yii\debug\models\search\Log;
+use Log;
 
 
 class MessageController extends Controller
@@ -60,7 +60,7 @@ class MessageController extends Controller
      * */
     public function responseKeyword($keywords= '')
     {
-        Log::info('keyword == '.$keywords);
+        Log::info('key == '.$keywords);
         if(empty($keywords)){
             $msg = $this->app->server->getMessage();
             $keywords = $msg['Content'];//接收关键字
