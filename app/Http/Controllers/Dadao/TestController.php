@@ -14,7 +14,7 @@ class TestController extends Controller
 
         $content = DB::table('wx_message')->where('keyword',1)->first();
         $content = json_decode($content->content);
-//        dump($content);
+        dump($content);
         echo $content->title;
         die;
 
