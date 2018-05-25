@@ -25,8 +25,14 @@ class MenuController extends Controller
     /*
      * 创建自定义菜单
      * */
-    public function addMenu()
+    public function addMenu(Request $request)
     {
+        $method = $request->method();
+        if($method != "POST"){
+            responce(404,'not found');
+            die;
+        }
+
         $reg_url = config('wechat_parameter.reg_url');
         $buttons = [
             [
@@ -76,8 +82,14 @@ class MenuController extends Controller
     /*
      * 删除菜单
      * */
-    public function deleteMenu()
+    public function deleteMenu(Request $request)
     {
-        return $this->app->menu->delete(); // 全部
+        $method = $request->method();
+        if($method == "POST"){
+            return $this->app->menu->delete(); // 全部
+        }else{
+            responce(404,'not found');
+        }
+
     }
 }
