@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dadao;
 
+
 use App\Http\Controllers\Wechat\WechatController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,8 +16,8 @@ class TestController extends Controller
 
         $wechat = new WechatController();
         dump($wechat);
-        $result = $this->createQrCode('bd_15212');
-        dump($result);
+//        $result = $this->createQrCode('bd_15212');
+//        dump($result);
         die;
 
         $id = false;
