@@ -91,6 +91,7 @@ class WechatController extends Controller
         $keywords = $msg['Content'];//接收关键字
         $content = DB::table('wx_message')->where('keyword',$keywords)->first();
         if($content){
+            //判断关键字回复类型
             if($content->type == 1){//文本消息
                 $content = $content->content;
                 $this->resposeText($content);
@@ -100,10 +101,7 @@ class WechatController extends Controller
             }
         }else{
             $content = '';
-            $openId = $msg['FromUserName'];
-            $message = new Text($content);
-            $app->customer_service->message($message)->to($openId)->send();
-            return $app->server->serve();
+            $this->resposeText($content);
         }
     }
 
