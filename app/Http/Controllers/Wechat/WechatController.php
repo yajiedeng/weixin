@@ -80,6 +80,7 @@ class WechatController extends Controller
             $news->picurl = $current_url."/images/dadao.jpg";
             $this->responseNews($news);
         }elseif ($message['Event'] == 'CLICK'){//自定义菜单点击事件
+            Log::info('request arrived.'.$message['Event']);
             $this->responseClick();
         }
     }
