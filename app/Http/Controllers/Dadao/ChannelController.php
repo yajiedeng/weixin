@@ -40,16 +40,10 @@ class ChannelController extends Controller
             //存入数据库并获取 id 字段
             $lastId = DB::table('channel_qrcode')->insertGetId($data);
             //生成二维码
-
-            $wechat = new WechatController();
+            $wechat = new WechatController;
             $result = $wechat->createQrCode("db_".$lastId);
-
-
-//            $app = app('wechat.official_account');
-//            $result = $app->qrcode->forever("db_".$lastId);
             //组装图片链接
             $imgUrl = $wechat->getQrCodeUrl($result['ticket']);
-//            $imgUrl = $app->qrcode->url($result['ticket']);
             //将二维码链接和 ticket 存入数据库
             DB::table('channel_qrcode')->where('id',$lastId)->update(['url' => $result['url'],'ticket'=>$result['ticket'],'imgUrl'=>$imgUrl]);
             // 返回图片链接

@@ -108,15 +108,6 @@ class WechatController extends Controller
     }
 
     /*
-     * 扫码事件处理
-     * */
-    public function responseScan()
-    {
-        $message = $this->app->server->getMessage();
-        Log::info('用户扫码',['key'=>$message['EventKey']]);
-    }
-
-    /*
      * 自定义菜单点击事件
      * */
     private function responseClick()
