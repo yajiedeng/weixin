@@ -13,8 +13,8 @@ class TestController extends WechatController
 {
     public function test(Request $request){
 
+        $result = app(WechatController::class)->createQrCode('bd_15212');
 
-        $result = $this->createQrCode('bd_15212');
         dump($result);
         die;
 
