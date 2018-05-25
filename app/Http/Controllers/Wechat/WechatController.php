@@ -14,15 +14,15 @@ use Log;
 class WechatController extends Controller
 {
     public $app;
-    public function __construct($app = '')
+    public function __construct()
     {
-        if($app){
-            //初始化
-            $this->app = $app;
-        }else{
-            //初始化
-            $this->app = app('wechat.official_account');
-        }
+        //初始化
+        $this->app = app('wechat.official_account');
+    }
+
+    public static function instance()
+    {
+        return new WechatController();
     }
 
     public function serve(Request $request)
