@@ -16,8 +16,8 @@ class TestController extends Controller
 
         $wechat = new WechatController();
         dump($wechat);
-//        $result = $this->createQrCode('bd_15212');
-//        dump($result);
+        $result = $wechat->createQrCode('bd_15212');
+        dump($result);
         die;
 
         $id = false;
