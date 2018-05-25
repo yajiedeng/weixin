@@ -74,14 +74,9 @@ class WechatController extends Controller
             $news->image = $current_url."/images/dadao.jpg";
 
             $content = DB::table('wx_message')->where('keyword','subscribe')->first();
-            if($content){
-                $content = $content->content;
-            }else{
-                $content = '';
-            }
+            $content = $content == null ? "" : $content->content;
             $this->resposeText($content);
             $this->responseNews($news);
-            return $app->server->serve();
         }
     }
 
