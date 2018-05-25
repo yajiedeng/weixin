@@ -27,12 +27,9 @@ class ChannelController extends Controller
             $code = config("wechat_parameter.channel_submit_code");
             //接收页面参数
             $data['username'] = $request->input('userName');
-            $data['vcode'] = $request->input('userName');
+            $data['vcode'] = $request->input('vcode');
             if(empty($data['username'])){
                 return responce(-1,"请输入渠道人员姓名");
-                exit();
-            }elseif (empty($data['vcode'])){
-                return responce(-1,"请输入验证码");
                 exit();
             }elseif ($data['vcode'] != $code){
                 return responce(-1,"验证码不正确");
