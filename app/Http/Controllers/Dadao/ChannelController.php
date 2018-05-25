@@ -11,11 +11,12 @@ class ChannelController extends Controller
     public function create(Request $request)
     {
         $method = $request->method();
+        echo $method;
         if($method == "GET"){
             return view('channel.add');
         }elseif($method == "POST"){
             dump('fhjdksjhfjkldslfkds');
-            
+
         }
     }
 }
