@@ -13,12 +13,12 @@ use Log;
 
 class WechatController extends Controller
 {
-    public $app;
-    public function __construct()
-    {
-        //初始化
-        $this->app = app('wechat.official_account');
-    }
+//    public $app;
+//    public function __construct()
+//    {
+//        //初始化
+//        $this->app = app('wechat.official_account');
+//    }
 
     public function serve(Request $request)
     {
@@ -94,7 +94,8 @@ class WechatController extends Controller
     public function createQrCode($sence_id)
     {
         //生成永久二维码
-        $result = $this->app->qrcode->forever($sence_id);
+        $app = app('wechat.official_account');
+        $result = $app->qrcode->forever($sence_id);
         return $result;//返回数组
     }
 
