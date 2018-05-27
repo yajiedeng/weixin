@@ -60,7 +60,6 @@ class MessageController extends Controller
      * */
     public function responseKeyword($keywords= '')
     {
-        Log::info('key == '.$keywords);
         if(empty($keywords)){
             $msg = $this->app->server->getMessage();
             $keywords = $msg['Content'];//接收关键字
@@ -86,13 +85,23 @@ class MessageController extends Controller
      * */
     private function subscribe()
     {
-        $current_url = getUrl();
-        $reg_url = config('wechat_parameter.reg_url');
+        $message = $this->app->server->getMessage();
+        if($message['EventKey']){
+            if(strpos($message['EventKey'],'bd') > -1){//扫描渠道二维码进行关注
+                $reg_url = config('wechat_parameter.splicing_reg_url');
+            }else{//扫描车辆维码进行关注
+
+            }
+        }else{
+            $reg_url = config('wechat_parameter.reg_url');
+        }
+
         //回复关注后的文本消息
         $content = DB::table('wx_message')->where('keyword','subscribe')->first();
         $content = $content == null ? "" : $content->content;
         $this->resposeText($content);
         //回复一条图文消息
+        $current_url = getUrl();
         $news = new \stdClass();
         $news->title = "新用户注册立即送";
         $news->description = "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~";
