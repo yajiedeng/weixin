@@ -4,22 +4,20 @@ namespace App\Http\Controllers\Dadao;
 
 
 use App\Http\Controllers\Wechat\WechatController;
+use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 use Log;
-use App\Libs\Demo;
-use OCR;
+use suniit\BaiduAi\AipOcr;
 
 class TestController extends Controller
 {
     public function test(Request $request){
 
-
         // 身份证识别
-        $filePath = "http://img2.imgtn.bdimg.com/it/u=3987992400,3053657058&fm=27&gp=0.jpg";//public_path().'/images/id_card.jpg';
-        $ocr = new OCR();
+        $img = "http://wechat.qihuapp.com/images/aaa.png";
+        $filePath = $img;//"http://img2.imgtn.bdimg.com/it/u=3987992400,3053657058&fm=27&gp=0.jpg";//public_path().'/images/id_card.jpg';
         $re = OCR::baidu()->idcard($filePath,[
             'detect_direction'      => false,      //是否检测图像朝向
             'id_card_side'          => 'front',    //front：身份证正面；back：身份证背面 （注意，该参数必选）

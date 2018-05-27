@@ -13,8 +13,8 @@ return [
     'ocrs' => [
 
         'baidu' => [
-            'app_key' => 'oNsefozDyBKzkPBzCGmZYpXZ',
-            'secret_key' => '9M8uWUhpGk2XGOQYqyvxG2oU14AlFucH'
+            'app_key' => 'LGKLKy3KgMpIUg4Wh2VmfFkq',
+            'secret_key' => 'X9Z6GkGQq2vYzr4T309TA648uMz8QpSW'
         ],
 
         'tencent' => [
