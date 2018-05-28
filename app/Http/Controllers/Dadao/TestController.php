@@ -15,6 +15,11 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
+        $str = 'qrscene_db_42';
+        $str = findNum($str);
+        dump($str);
+        die;
+
         // 身份证识别
         $img = "http://wechat.qihuapp.com/images/aaa.png";
         $filePath = $img;//"http://img2.imgtn.bdimg.com/it/u=3987992400,3053657058&fm=27&gp=0.jpg";//public_path().'/images/id_card.jpg';
