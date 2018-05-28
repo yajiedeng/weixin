@@ -119,6 +119,7 @@
                 });
                 $.post("{{url('/docreate')}}",{username:username,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
                     console.log(data);
+                    return;
                     if(data.code == 1){
                         qrcode = data.data;
                         $('.qrcode').attr('src',data.data);
