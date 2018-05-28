@@ -99,15 +99,17 @@ class MessageController extends Controller
     private function subscribe()
     {
         $message = $this->app->server->getMessage();
+        $reg_url = config('wechat_parameter.reg_url');//注册链接
         if($message['EventKey']){
             Log::info('用户扫码',['key'=>$message['EventKey']]);
-            if(strpos($message['EventKey'],'bd') > -1){//扫描渠道二维码进行关注
-                $reg_url = config('wechat_parameter.splicing_reg_url');
+            //qrscene_db_42 实例数据
+            if(strpos($message['EventKey'],'bd_') > -1){//扫描渠道二维码进行关注
+                $bd_id = findNum($message['EventKey']);
+                $reg_url = config('wechat_parameter.splicing_reg_url');//带参数的注册链接
+                $reg_url = sprintf($reg_url,$bd_id);
             }else{//扫描车辆维码进行关注
-
+                
             }
-        }else{
-            $reg_url = config('wechat_parameter.reg_url');
         }
 
         //回复关注后的文本消息
