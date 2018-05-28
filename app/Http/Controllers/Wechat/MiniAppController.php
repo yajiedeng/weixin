@@ -56,12 +56,6 @@ class MiniAppController extends Controller
         $user_id = $request->input('user_id');
         $code = $request->input('code');
         $user = User::find($user_id);
-        //获取用户openid unideid session_key
-        $result = $this->app->auth->session($code);
-        Log::info('user '.$user_id.' wechat info '.json_encode($result));
-        if(isset($result['errcode'])){
-            return responce($result['errcode'],$result['errmsg']);
-        }
         //查询是否有该用户信息
         if($code == -1){//获取openid
             if($user){//用户信息存在返回openid
@@ -72,6 +66,12 @@ class MiniAppController extends Controller
                 die;
             }
         }else{//存储openid
+            //获取用户openid unideid session_key
+            $result = $this->app->auth->session($code);
+            Log::info('user '.$user_id.' wechat info '.json_encode($result));
+            if(isset($result['errcode'])){
+                return responce($result['errcode'],$result['errmsg']);
+            }
             //判断该用户openid是否存在
             if($user && $user->openid != 0){//openid 已存在
                 return responce(200,'success',$user->openid);
