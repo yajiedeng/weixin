@@ -16,6 +16,9 @@ class TestController extends Controller
 {
     public function test(Channel $request){
 
+        $user = User::find(28);
+        dd($user);
+
         $re = $this->validate($request,[
             'name' => 'required|string|max:6',
         ]);

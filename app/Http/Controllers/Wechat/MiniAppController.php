@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
+use Illuminate\Support\Facades\Cache;
+use App\Models\User;
 
 class MiniAppController extends Controller
 {
@@ -45,17 +47,26 @@ class MiniAppController extends Controller
     //小程序用户获取openid
     public function getOpenid(Request $request){
         $method = $this->method;
-        $app = $this->app;
         if($method != "POST"){
             responce('502','The server rejected your request');
+            die;
         }
 
-        //用户id
+        //接收参数
         $user_id = $request->input('user_id');
-        //用户登陆code
         $code = $request->input('code');
+        $user = User::find($user_id);
 
-        $res = $app->auth->session($code);
-        dump($res);
+        //查询是否有该用户信息
+        if($code == -1){//获取openid
+
+        }else{//存储openid
+            //判断该用户openid是否存在
+
+        }
+        //用户登陆code
+
+        $result = $this->app->auth->session($code);
+
     }
 }
