@@ -89,7 +89,7 @@
         <div class="from-item">
             <div class="item">
                 <div class="item-text">姓名</div>
-                <input class="item-input" name="username" type="text" placeholder="请输入渠道人员姓名" required>
+                <input class="item-input" name="userName" type="text" placeholder="请输入渠道人员姓名" required>
             </div>
             <div class="item">
                 <div class="item-text">验证码</div>
@@ -112,15 +112,13 @@
         $(function () {
             var qrcode = '';
             $('.submit').click(function () {
-                var username = $("input[name=username]").val();
+                var userName = $("input[name=userName]").val();
                 var vcode = $("input[name=vcode]").val();
                 layer.load(1, {
                     shade: [0.1,'#fff'] //0.1透明度的白色背景
                 });
                 $.post("{{url('/docreate')}}",{username:username,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
-                    // console.log(data.status);
-                    console.log(data.status);
-                    return;
+                    console.log(data);
                     if(data.code == 1){
                         qrcode = data.data;
                         $('.qrcode').attr('src',data.data);
@@ -129,7 +127,7 @@
                         layer.msg(data.msg);
                     }
                     layer.closeAll("loading");
-                },'json');
+                });
             });
             //下载图片
             $('.download').click(function(){

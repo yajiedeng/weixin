@@ -21,12 +21,9 @@ class ChannelController extends Controller
     {
         if($request->method() == "POST"){
             //验证
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|unique:channel|max:10',
+            $this->validate($request,[
+                'username' => 'required|unique:channel|max:6',
             ]);
-            return $validator;
-
-            die;
 
 
             $code = config("wechat_parameter.channel_submit_code");
