@@ -128,7 +128,7 @@
                         layer.msg(data.msg);
                     }
                     layer.closeAll("loading");
-                });
+                },json);
             });
             //下载图片
             $('.download').click(function(){
