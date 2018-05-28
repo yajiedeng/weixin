@@ -25,6 +25,8 @@ class ChannelController extends Controller
                 'username' => 'required|unique:channel|max:6',
             ]);
 
+            die;
+
 
             $code = config("wechat_parameter.channel_submit_code");
             //接收页面参数
