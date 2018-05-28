@@ -20,6 +20,12 @@ class ChannelController extends Controller
     public function doCreate(Request $request)
     {
         if($request->method() == "POST"){
+            //验证
+            $this->validate($request,[
+                'username' => 'required|unique:channel|max:6',
+            ]);
+
+
             $code = config("wechat_parameter.channel_submit_code");
             //接收页面参数
             $data['username'] = $request->input('userName');
