@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
 use App\Models\User;
+use App\Http\Controllers\Wechat\WechatController;
 use Log;
 
 class MiniAppController extends Controller
@@ -126,5 +127,29 @@ class MiniAppController extends Controller
             $data = responce(400,'Error of parameters');
             return $data;
         }
+    }
+
+    /*
+     * 生成车辆二维码
+     * */
+    public function createCarQrCode()
+    {
+        $plate = request('plate','京Q5KK81');//$request->input('plate','京Q5KK81');
+        $secen_id = time();
+        $res = DB::table('car_plate_number')->insert(['plate_number'=>$plate,'secen_id'=>$secen_id]);
+        //生成二维码
+        $wechat = new WechatController;
+        $result = $wechat->createQrCode($secen_id);
+        //组装图片链接
+        $imgUrl = $wechat->getQrCodeUrl($result['ticket']);
+        $data = QrCodeController::createQrCode("cart",$secen_id);
+        if($res){
+            $time = date('m/d/Y H:i:s',time());
+            $res = DB::table('car_qrcode')->insert(['url'=>$data['url'],'secen_id'=>$secen_id,'ticket'=>$data['ticket'],'status'=>1,'user_id'=>88888,'create_time'=>$time]);
+        }
+        var_dump($data);
+        dd($res);
+        $data = QrCodeController::createQrCode("cart",'11111111');
+        dd($data);
     }
 }

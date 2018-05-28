@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Wechat'], function(){
     Route::any('/wechat','WechatController@serve');
     Route::any('/miniapp','MiniAppController@serve');
     Route::post('/openid/get','MiniAppController@getOpenid');
+    Route::post('/carqrcode/add','MiniAppController@createCarQrCode');
 });
 
 Route::any('test',"Dadao\TestController@test");
