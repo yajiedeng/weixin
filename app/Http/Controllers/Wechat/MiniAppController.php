@@ -58,12 +58,13 @@ class MiniAppController extends Controller
         $user = User::where('user_id', $user_id)->first();
         //查询是否有该用户信息
         if($code == -1){//获取openid
-            //记录返回 openid 日志
-            Log::info('user '.$user_id.' get openid '.json_encode($user));
             if($user){//用户信息存在返回openid
+                //记录返回 openid 日志
+                Log::info('user '.$user_id.' get openid '.$user->openid);
                 return responce(200,'success',$user->openid);
                 die;
             }else{
+                Log::info('user '.$user_id.' not openid ');
                 return responce(400,'not openid','');
                 die;
             }
