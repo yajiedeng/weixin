@@ -45,7 +45,9 @@ class MessageController extends Controller
         $senceStr = $message['EventKey'];
         if(strpos($senceStr,'bd_') > -1){//扫描渠道二维码
             //回复注册的图文消息
-            $reg_url = config('wechat_parameter.splicing_reg_url');//注册链接拼接bd_id
+            //注册链接拼接bd_id
+            $reg_url = config('wechat_parameter.splicing_reg_url');
+            $reg_url = sprintf($reg_url,3,strlen($senceStr) - 1);
             $current_url = getUrl();
             $news = new \stdClass();
             $news->title = "新用户注册立即送";
@@ -100,11 +102,12 @@ class MessageController extends Controller
     {
         $message = $this->app->server->getMessage();
         $reg_url = config('wechat_parameter.reg_url');//注册链接
-        if($message['EventKey']){
-            Log::info('用户扫码',['key'=>$message['EventKey']]);
+        $senceStr = $message['EventKey'];
+        if($senceStr){
+            Log::info('用户扫码',['key'=>$senceStr]);
             //qrscene_db_42 实例数据
-            if(strpos($message['EventKey'],'bd_') > -1){//扫描渠道二维码进行关注
-                $bd_id = substr($message['EventKey'],10,strlen($message['EventKey']) - 1);
+            if(strpos($senceStr,'bd_') > -1){//扫描渠道二维码进行关注
+                $bd_id = substr($senceStr,11,strlen($senceStr) - 1);
                 Log::info('用户扫码',['bd_id'=>$bd_id]);
                 $reg_url = config('wechat_parameter.splicing_reg_url');//带参数的注册链接
                 $reg_url = sprintf($reg_url,$bd_id);
