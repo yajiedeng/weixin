@@ -22,7 +22,7 @@ class ChannelController extends Controller
         if($request->method() == "POST"){
             //验证
             $this->validate($request,[
-                'username' => 'required|unique:channel|max:6',
+                'username' => 'required',
             ]);
 
             die;
