@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
 use App\Models\User;
 use App\Http\Controllers\Wechat\WechatController;
+use Illuminate\Support\Facades\DB;
 use Log;
 
 class MiniAppController extends Controller
