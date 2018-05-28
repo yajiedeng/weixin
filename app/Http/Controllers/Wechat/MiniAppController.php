@@ -59,8 +59,8 @@ class MiniAppController extends Controller
         //获取用户openid unideid session_key
         $result = $this->app->auth->session($code);
         Log::info('user '.$user_id.' wechat info '.json_encode($result));
-        if($result['errcode']){
-            responce(400,'invalid code','');
+        if($result['errcode'] == 40163){
+            responce($result['errcode'],$result['errmsg']);
             die;
         }
         //查询是否有该用户信息
