@@ -4,16 +4,40 @@ namespace App\Http\Controllers\Dadao;
 
 
 use App\Http\Controllers\Wechat\WechatController;
+use App\Http\Requests\Channel;
 use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Log;
-use suniit\BaiduAi\AipOcr;
+use App\Models\User;
 
 class TestController extends Controller
 {
-    public function test(Request $request){
+    public function test(Channel $request){
+
+        $re = $this->validate($request,[
+            'name' => 'required|string|max:6',
+        ]);
+
+        dump($re);die;
+
+
+        $res = $this->validate($request, [
+            'name' => 'required'
+        ]);
+        dump($res);
+        die;
+
+        dump($request);
+
+        die;
+
+        $user = User::create(['name'=>'User 456']);
+        $id = $user->id;
+        echo $id;
+        dump($user);
+        die;
 
         $str = 'qrscene_db_42';
         $str = findNum($str);
