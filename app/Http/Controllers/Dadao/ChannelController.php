@@ -37,21 +37,21 @@ class ChannelController extends Controller
                 return responce(-1,"验证码不正确");
                 exit();
             }
-            $one = DB::table('channel_qrcode')->where('username',$data['username'])->first();
+            $one = DB::table('channel')->where('username',$data['username'])->first();
             if($one){
                 return responce(-1,"用户名已存在");
                 exit();
             }
             unset($data['vcode']);
             //存入数据库并获取 id 字段
-            $lastId = DB::table('channel_qrcode')->insertGetId($data);
+            $lastId = DB::table('channel')->insertGetId($data);
             //生成二维码
             $wechat = new WechatController;
             $result = $wechat->createQrCode("bd_".$lastId);
             //组装图片链接
             $imgUrl = $wechat->getQrCodeUrl($result['ticket']);
             //将二维码链接和 ticket 存入数据库
-            DB::table('channel_qrcode')->where('id',$lastId)->update(['url' => $result['url'],'ticket'=>$result['ticket'],'imgUrl'=>$imgUrl]);
+            DB::table('channel')->where('id',$lastId)->update(['url' => $result['url'],'ticket'=>$result['ticket'],'imgUrl'=>$imgUrl]);
             // 返回图片链接
             return responce(1,"获取成功",$imgUrl);
         }
