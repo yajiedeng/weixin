@@ -78,14 +78,14 @@ class MiniAppController extends Controller
                 $user->session_key = $result['session_key'];
 //                $user->unionid = $result['unionid'];
                 if($user->save()){
-                    responce(200,'success',$result->openid);
+                    responce(200,'success',$result['openid']);
                     die;
                 }
             }elseif(!$user){
 //                $user = User::create(['user_id'=>$user_id,'openid'=>$result['openid'],'session_key'=>$result['session_key'],'unionid'=>$result['unionid']]);
                 $user = User::create(['user_id'=>$user_id,'openid'=>$result['openid'],'session_key'=>$result['session_key']]);
                 if($user){
-                    responce(200,'success',$result->openid);
+                    responce(200,'success',$result['openid']);
                     die;
                 }
             }
