@@ -118,7 +118,7 @@
                     shade: [0.1,'#fff'] //0.1透明度的白色背景
                 });
                 $.post("{{url('/docreate')}}",{username:username,vcode:vcode,'_token': '{{ csrf_token() }}'},function (data) {
-                    console.log(data);
+                    console.log(data.name);
                     return;
                     if(data.code == 1){
                         qrcode = data.data;
