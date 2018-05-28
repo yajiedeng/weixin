@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dadao;
 
 
 use App\Http\Controllers\Wechat\WechatController;
-use App\Http\Requests\Channel;
 use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +13,12 @@ use App\Models\User;
 
 class TestController extends Controller
 {
-    public function test(Channel $request){
+    public function test(Request $request){
 
         $user = User::find(28);
         dd($user);
+
+        die;
 
         $re = $this->validate($request,[
             'name' => 'required|string|max:6',
