@@ -42,7 +42,20 @@ class MessageController extends Controller
     private function responseScan()
     {
         $message = $this->app->server->getMessage();
+        $senceStr = $message['EventKey'];
+        if(strpos($senceStr,'bd_') > -1){//扫描渠道二维码
+            //回复注册的图文消息
+            $reg_url = config('wechat_parameter.splicing_reg_url');//注册链接拼接bd_id
+            $current_url = getUrl();
+            $news = new \stdClass();
+            $news->title = "新用户注册立即送";
+            $news->description = "现在新用户注册就有大礼包相送，机会不等人，还不赶快来~";
+            $news->url = $reg_url;
+            $news->picurl = $current_url."/images/dadao.jpg";
+            $this->responseNews($news);
+        }
         Log::info('用户扫码',['key'=>$message['EventKey']]);
+
     }
 
     /*
@@ -87,6 +100,7 @@ class MessageController extends Controller
     {
         $message = $this->app->server->getMessage();
         if($message['EventKey']){
+            Log::info('用户扫码',['key'=>$message['EventKey']]);
             if(strpos($message['EventKey'],'bd') > -1){//扫描渠道二维码进行关注
                 $reg_url = config('wechat_parameter.splicing_reg_url');
             }else{//扫描车辆维码进行关注
