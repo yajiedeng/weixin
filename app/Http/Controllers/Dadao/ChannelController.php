@@ -21,9 +21,10 @@ class ChannelController extends Controller
     {
         if($request->method() == "POST"){
             //验证
-            $this->validate($request,[
-                'username' => 'required',
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|unique:channel|max:10',
             ]);
+            return $validator;
 
             die;
 
