@@ -56,7 +56,7 @@ function responce($code='200',$msg='ok',$result='')
         'msg'  => (string)$msg,
         'data' => (string)$result
     ];
-    if($result == null){
+    if($result === null){
         unset($data['data']);
     }
     return $data;

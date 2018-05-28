@@ -98,4 +98,33 @@ class MiniAppController extends Controller
             }
         }
     }
+
+    /*
+     *  小程序扫描查询车牌号
+     * */
+    public function getPlateNumber()
+    {
+        //获取参数
+        $key = request('keywords');
+        //判断是链接还是 sence_id
+        if(strpos($key,'http') > -1){
+            $data = DB::table('car_qrcode')->where('url',$key)->first();
+            $key = $data->secen_id;
+        }
+        if(!empty($key)){
+            $data = DB::table('car_plate_number')->where('secen_id',$key)->first();
+            if($data){
+                $data = responce(200,'Gain success',$data->plate_number);
+                return $data;
+                exit();
+            }else{
+                $data = responce(404,'No data information');
+                return $data;
+                exit();
+            }
+        }else{
+            $data = responce(400,'Error of parameters');
+            return $data;
+        }
+    }
 }

@@ -27,16 +27,13 @@ class ChannelController extends Controller
             $data['username'] = $request->input('userName');
             $data['vcode'] = $request->input('vcode');
             if(empty($data['username'])){
-                return responce(-1,"请输入渠道人员姓名");
-                exit();
+                return responce(-1,"请输入渠道人员姓名",null);
             }elseif ($data['vcode'] != $code){
-                return responce(-1,"验证码不正确");
-                exit();
+                return responce(-1,"验证码不正确",null);
             }
             $one = DB::table('channel')->where('username',$data['username'])->first();
             if($one){
-                return responce(-1,"用户名已存在");
-                exit();
+                return responce(-1,"用户名已存在",null);
             }
             unset($data['vcode']);
             //存入数据库并获取 id 字段
