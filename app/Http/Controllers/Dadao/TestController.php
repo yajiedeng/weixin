@@ -16,6 +16,7 @@ class TestController extends Controller
     public function test(Request $request){
 
         $user = User::all();
+        $user = User::find(28);
         dd($user);
 
         die;
