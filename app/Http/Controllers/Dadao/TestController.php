@@ -24,7 +24,8 @@ class TestController extends Controller
         $image = file_get_contents(public_path().'/images/a.jpg');
 
         // 调用人脸检测
-        $client->detect($image);
+        $data = $client->detect($image);
+        dump($data);
 
         die;
 
