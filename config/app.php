@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Godruoyi\LaravelOCR\OCRServiceProvider::class,
+        Reprover\BaiduAi\ServiceProvider::class,
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'OCR' => Godruoyi\LaravelOCR\OCR::class,
+        'Ai' => Reprover\BaiduAi\Ai::class,
 
     ],
 

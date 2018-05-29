@@ -11,10 +11,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Log;
 use App\Models\User;
+use Reprover\BaiduAi\Ai;
 
 class TestController extends Controller
 {
     public function test(Request $request){
+
+        $result = Ai::Nlp()->topic('标题','这里是测试文本');
+        dump($result);
+
+        die;
 
         $face = new Face();
         dd($face);

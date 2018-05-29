@@ -8,6 +8,7 @@
 
 namespace App\Libs;
 
-class Face{
+class Face
+{
 
 }
