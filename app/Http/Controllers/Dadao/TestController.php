@@ -21,10 +21,14 @@ class TestController extends Controller
         $appKey = config('ai.apiKey');
         $appSecret = config('ai.apiSecret');
         $client = new AipFace($appId, $appKey, $appSecret);
-        $image = file_get_contents(public_path().'/images/a.jpg');
+        $images = [
+            file_get_contents(public_path().'/images/a.jpg'),
+            file_get_contents(public_path().'/images/b.jpg'),
+        ];
+//        $image = file_get_contents(public_path().'/images/a.jpg');
 
         // 调用人脸检测
-        $data = $client->detect($image);
+        $data = $client->match($images);
         dump($data);
 
         die;
