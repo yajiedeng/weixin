@@ -15,7 +15,7 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-        require "./vendor/robey/AipFace.php";
+        require "../vendor/robey/AipFace.php";
 
         $face = new AipFace();
 
