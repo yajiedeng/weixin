@@ -17,6 +17,9 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
+        $face = new Face();
+        $face->getAccessToken();
+
         $result = Ai::Nlp()->topic('标题','这里是测试文本');
         dump($result);
 

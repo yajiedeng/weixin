@@ -27,7 +27,6 @@ class MiniAppController extends Controller
         $app = $this->app;
         //获取请求方式
         $method = $this->method;
-
         if($method == "POST"){//接收用户回复
             $message = $app->server->getMessage();
             $openId = $message['FromUserName'];
@@ -44,7 +43,8 @@ class MiniAppController extends Controller
         }elseif ($method == "GET") {
             $app->server->push(function ($message) {//首次token验证
                 //回复内容
-                $content = config('message.miniapp_zhima');
+                $zhima_url = config('wechat_parameter.zhima_url');
+                $content = "你好，大道用车为你服务，绑定芝麻信用请点击链接:".$zhima_url;
                 // $message['FromUserName'] // 用户的 openid
                 // $message['MsgType'] // 消息类型：event, text....
                 return $content;
@@ -92,14 +92,22 @@ class MiniAppController extends Controller
                 $user->user_id = $user_id;
                 $user->openid = $result['openid'];
                 $user->session_key = $result['session_key'];
-//                $user->unionid = $result['unionid'];
+                if(!empty($result['unionid'])){
+                    $user->unionid = $result['unionid'];
+                }
                 if($user->save()){
                     return responce(200,'success',$result['openid']);
                     die;
                 }
             }elseif(!$user){
 //                $user = User::create(['user_id'=>$user_id,'openid'=>$result['openid'],'session_key'=>$result['session_key'],'unionid'=>$result['unionid']]);
-                $user = User::create(['user_id'=>$user_id,'openid'=>$result['openid'],'session_key'=>$result['session_key']]);
+                $datas['user_id'] = $user_id;
+                $datas['openid'] = $result['openid'];
+                $datas['session_key'] = $result['session_key'];
+                if(!empty($result['unionid'])){
+                    $datas['unionid'] = $result['unionid'];
+                }
+                $user = User::create($datas);
                 if($user){
                     return responce(200,'success',$result['openid']);
                     die;
@@ -109,31 +117,43 @@ class MiniAppController extends Controller
     }
 
     /*
+     *  小程序验证身份证、驾驶证与真实姓名是否匹配
+     * */
+    public function userValidation()
+    {
+
+    }
+
+    /*
      *  小程序扫描查询车牌号
      * */
     public function getPlateNumber()
     {
         //获取参数
-        $key = request('keywords');
-        //判断是链接还是 sence_id
-        if(strpos($key,'http') > -1){
-            $data = DB::table('car_qrcode')->where('url',$key)->first();
-            $key = $data->secen_id;
-        }
+        $key = request('keywords','');
+        Log::info('查询车牌号为的关键字是： '.$key);
         if(!empty($key)){
+            //判断是链接还是 sence_id
+            if(strpos($key,'http') > -1){
+                $data = DB::table('car_qrcode')->where('url',$key)->first();
+                $key = $data->secen_id;
+            }
             $data = DB::table('car_plate_number')->where('secen_id',$key)->first();
             if($data){
+                Log::info('车牌号是 '.$data->plate_number);
                 $data = responce(200,'Gain success',$data->plate_number);
                 return $data;
-                exit();
+                die;
             }else{
+                Log::error('没有找到车牌号');
                 $data = responce(404,'No data information');
                 return $data;
-                exit();
+                die;
             }
         }else{
             $data = responce(400,'Error of parameters');
             return $data;
+            die;
         }
     }
 

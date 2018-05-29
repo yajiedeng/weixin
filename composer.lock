@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c666cfde0d64989721508e6a1bb6fd25",
+    "content-hash": "cfabf4b34feb41febf48a2b58c2c1e1b",
     "packages": [
+        {
+            "name": "biaoqianwo/face",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/biaoqianwo/face.git",
+                "reference": "0daeea7c052dc637b3c68a630be5da84c3c04f37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/biaoqianwo/face/zipball/0daeea7c052dc637b3c68a630be5da84c3c04f37",
+                "reference": "0daeea7c052dc637b3c68a630be5da84c3c04f37",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/cache": "^1.6",
+                "guzzlehttp/guzzle": "^6.3",
+                "pimple/pimple": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Biaoqianwo\\Face\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "biaoqianwo",
+                    "email": "704872038@qq.com"
+                }
+            ],
+            "description": "The Best Image Ocr SDK For BAT.",
+            "homepage": "http://github.com/biaoqianwo/face",
+            "keywords": [
+                "face",
+                "人脸比对",
+                "百度AI人脸识别",
+                "腾讯人脸识别",
+                "阿里云人脸识别"
+            ],
+            "time": "2017-11-02T08:16:15+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
