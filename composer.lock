@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49d48e52e7cd50b585ddaaa91759d913",
+    "content-hash": "b244eb5834a66c411ed47ceaff995065",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1956,52 +1956,6 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
-        },
-        {
-            "name": "reprover/baidu-ai",
-            "version": "1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reprover/baidu-ai.git",
-                "reference": "b9e6829ea3bee256597ad59586acd2712206db85"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reprover/baidu-ai/zipball/b9e6829ea3bee256597ad59586acd2712206db85",
-                "reference": "b9e6829ea3bee256597ad59586acd2712206db85",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/laravel": ">=5.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Reprover\\BaiduAi\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "Ai": "Reprover\\BaiduAi\\Facade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Reprover\\BaiduAi\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jian Li",
-                    "email": "mydr@vip.qq.com"
-                }
-            ],
-            "description": "百度AI开放平台封装sdk",
-            "time": "2018-05-23T16:19:15+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

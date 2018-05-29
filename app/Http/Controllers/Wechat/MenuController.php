@@ -33,7 +33,8 @@ class MenuController extends Controller
             die;
         }
 
-        $reg_url = config('wechat_parameter.reg_url');
+        $reg_url = config('wechat_parameter.reg_url');// 用户注册链接
+        $zhima_url = config('wechat_parameter.zhima_url');// 芝麻信用页面链接
         $buttons = [
             [
                 "type" => "view",
@@ -63,6 +64,11 @@ class MenuController extends Controller
             [
                 "name"       => "为您服务",
                 "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "芝麻信用认证",
+                        "key"  => $zhima_url
+                    ],
                     [
                         "type" => "click",
                         "name" => "客服热线",

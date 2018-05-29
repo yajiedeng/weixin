@@ -22,8 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Wechat'], function(){
     Route::any('/wechat','WechatController@serve');
     Route::any('/miniapp','MiniAppController@serve');
-    Route::post('/openid/get','MiniAppController@getOpenid');
+    Route::post('/program/openid/put','MiniAppController@getOpenid');
     Route::post('/carqrcode/add','MiniAppController@createCarQrCode');
+    Route::post('/car/get/plates','MiniAppController@getPlateNumber');
 });
 
 Route::any('test',"Dadao\TestController@test");
