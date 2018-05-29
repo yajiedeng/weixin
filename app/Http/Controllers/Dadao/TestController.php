@@ -19,6 +19,7 @@ class TestController extends Controller
 
         $result = Ai::Nlp()->topic('标题','这里是测试文本');
         dump($result);
+        
 
         die;
 
