@@ -11,14 +11,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Log;
 use App\Models\User;
-use Reprover\BaiduAi\Ai;
+use Biaoqianwo\Face\Application as BiaoFace;
 
 class TestController extends Controller
 {
     public function test(Request $request){
 
-        $face = new Face();
-        $face->getAccessToken();
+        $appKey = config('ai.apiKey');
+        $secretKey = config('ai.apiSecret');
+
+        $app = new BiaoFace([
+            'appKey' => $appKey,
+            'secretKey' => $secretKey
+        ]);
+
+        $files = [
+            public_path()."/images/a.jpg",
+            public_path()."/images/b.jpg",
+//            'https://wechat-oa-dev.mydadao.com/images/a.jpg',
+//            'https://wechat-oa-dev.mydadao.com/images/b.jpg',
+        ];
+        //人脸比对
+        $result = $app->baidu->match($files);
+
+        dump($result);
+        die;
 
         $result = Ai::Nlp()->topic('标题','这里是测试文本');
         dump($result);
