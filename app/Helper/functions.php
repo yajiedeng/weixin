@@ -59,7 +59,7 @@ function responce($code='200',$msg='ok',$result='')
     if($result === null){
         unset($data['data']);
     }
-    return $data;
+    return response()->json($data);
 }
 
 
