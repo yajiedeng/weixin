@@ -27,13 +27,20 @@ class MiniAppController extends Controller
         $app = $this->app;
         //获取请求方式
         $method = $this->method;
+
         if($method == "POST"){//接收用户回复
-            //回复内容
-            $content = config('message.miniapp_zhima');
             $message = $app->server->getMessage();
             $openId = $message['FromUserName'];
-            $text = new Text($content);
-            $app->customer_service->message($text)->to($openId)->send();
+            if($message['Content'] == "芝麻信用" || $message['Content'] == 1){
+                //回复内容
+                $zhima_url = config('wechat_parameter.zhima_url');
+                $content = "你好，大道用车为你服务，绑定芝麻信用请点击链接:".$zhima_url;
+                $text = new Text($content);
+                $app->customer_service->message($text)->to($openId)->send();
+            }else{
+                $text = '';
+                $app->customer_service->message($text)->to($openId)->send();
+            }
         }elseif ($method == "GET") {
             $app->server->push(function ($message) {//首次token验证
                 //回复内容

@@ -15,6 +15,14 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
+        require "./vendor/robey/AipFace.php";
+
+        $face = new \AipFace();
+
+        dd($face);
+        
+        die;
+
         $user = User::all();
         $user = User::find(28);
         dd($user);
