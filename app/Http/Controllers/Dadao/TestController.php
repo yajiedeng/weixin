@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dadao;
 
 
 use App\Http\Controllers\Wechat\WechatController;
+use App\Libs\Face;
 use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,11 +16,7 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-//        require "../vendor/robey/AipFace.php";
-        require app_path().'/vendor/robey/AipFace.php';
-
-        $face = new AipFace();
-
+        $face = new Face();
         dd($face);
 
         die;

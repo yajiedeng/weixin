@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9448f03f005ca16cc5e48dd91488dd93",
+    "content-hash": "b6c1e6b302635e5a0ea9bd80807ad8b1",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1955,42 +1955,6 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
-        },
-        {
-            "name": "robey/face-api",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mu-xin/face-api.git",
-                "reference": "e06e870a2eee2788b6ca844fac01f053e48ff640"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mu-xin/face-api/zipball/e06e870a2eee2788b6ca844fac01f053e48ff640",
-                "reference": "e06e870a2eee2788b6ca844fac01f053e48ff640",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "robey",
-                    "email": "andy771480011@gmail.com"
-                }
-            ],
-            "description": "base baidu face api sdk develop laravel plugin",
-            "time": "2018-04-18T06:59:05+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
