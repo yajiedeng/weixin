@@ -6,7 +6,7 @@
  */
 
 return [
-    'appId'=>'',
-    'apiKey'=>'',
-    'apiSecret'=>''
+    'appId'=>'11316308',
+    'apiKey'=>'g1r2z3S9aOEuf7ErIXI7YSEg',
+    'apiSecret'=>'ra65GKP0XjVceoYmk0dV9nxs1LZs0xN8'
 ];
