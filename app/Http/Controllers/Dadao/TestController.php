@@ -17,10 +17,10 @@ class TestController extends Controller
 
         require "./vendor/robey/AipFace.php";
 
-        $face = new \AipFace();
+        $face = new AipFace();
 
         dd($face);
-        
+
         die;
 
         $user = User::all();
