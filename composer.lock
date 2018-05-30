@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d8860a933e41f73afc7901ed9c9ef1e",
+    "content-hash": "87d8307d0093e3b2136ad1c11a63ac82",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -711,6 +711,105 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "hinet/flysystem-baidu-bos",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hinet/flysystem-baidu-bos.git",
+                "reference": "c054e3d13d68f79430eaa5d882817885d1ee279c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/hinet/flysystem-baidu-bos/c054e3d13d68f79430eaa5d882817885d1ee279c.zip",
+                "reference": "c054e3d13d68f79430eaa5d882817885d1ee279c",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hinet\\Flysystem\\BaiduBos\\": "src/"
+                },
+                "files": [
+                    "src/BaiduBce.phar"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zhu Xiaoqiao",
+                    "email": "zhffan@163.com"
+                },
+                {
+                    "name": "hinet",
+                    "email": "63603636@qq.com"
+                }
+            ],
+            "description": "Flysystem adapter for Baidu Bos SDK v0.8.20",
+            "time": "2016-12-06T05:27:31+00:00"
+        },
+        {
+            "name": "hinet/laravel-baidu-bos",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hinet/laravel-baidu-bos.git",
+                "reference": "0be9ae8272e1db8797e036487b979816ffd93dbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/hinet/laravel-baidu-bos/0be9ae8272e1db8797e036487b979816ffd93dbb.zip",
+                "reference": "0be9ae8272e1db8797e036487b979816ffd93dbb",
+                "shasum": ""
+            },
+            "require": {
+                "hinet/flysystem-baidu-bos": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hinet\\Baidu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zhu Xiaoqiao",
+                    "email": "zhffan@163.com"
+                },
+                {
+                    "name": "hinet",
+                    "email": "63603636@qq.com"
+                }
+            ],
+            "description": "A Flysystem Baidu Bos Wrapper for Laravel",
+            "time": "2016-12-05T11:04:15+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3199,97 +3298,6 @@
             ],
             "description": "百度云人脸识别 SDK FOR PHP",
             "time": "2018-03-22T03:44:39+00:00"
-        },
-        {
-            "name": "zhuxiaoqiao/flysystem-baidu-bos",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zhuxiaoqiao/flysystem-baidu-bos.git",
-                "reference": "ed20dc6daccd2c718b0fe9c2b705b31b446ef13a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/zhuxiaoqiao/flysystem-baidu-bos/ed20dc6daccd2c718b0fe9c2b705b31b446ef13a.zip",
-                "reference": "ed20dc6daccd2c718b0fe9c2b705b31b446ef13a",
-                "shasum": ""
-            },
-            "require": {
-                "league/flysystem": "~1.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zhuxiaoqiao\\Flysystem\\BaiduBos\\": "src/"
-                },
-                "files": [
-                    "src/BaiduBce.phar"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Zhu Xiaoqiao",
-                    "email": "zhffan@163.com"
-                }
-            ],
-            "description": "Flysystem adapter for Baidu Bos SDK v0.8.1",
-            "time": "2015-08-05T08:01:14+00:00"
-        },
-        {
-            "name": "zhuxiaoqiao/laravel-baidu-bos",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zhuxiaoqiao/laravel-baidu-bos.git",
-                "reference": "c8a8ae714a899f1d1571621ed66d8c46f54fd2cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/zhuxiaoqiao/laravel-baidu-bos/c8a8ae714a899f1d1571621ed66d8c46f54fd2cc.zip",
-                "reference": "c8a8ae714a899f1d1571621ed66d8c46f54fd2cc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "zhuxiaoqiao/flysystem-baidu-bos": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zhuxiaoqiao\\LaravelBaiduBos\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Zhu Xiaoqiao",
-                    "email": "zhffan@163.com"
-                }
-            ],
-            "description": "A Flysystem Baidu Bos Wrapper for Laravel",
-            "time": "2015-05-21T03:54:08+00:00"
         }
     ],
     "packages-dev": [

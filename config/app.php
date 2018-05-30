@@ -177,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Godruoyi\LaravelOCR\OCRServiceProvider::class,
-        Zhuxiaoqiao\LaravelBaiduBos\BaiduBosFilesystemServiceProvider::class,
+        Hinet\Baidu\BaiduServiceProvider::class,
 
     ],
 
