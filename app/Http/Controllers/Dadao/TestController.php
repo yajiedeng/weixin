@@ -39,8 +39,8 @@ class TestController extends Controller
         $appSecret = config('ai.apiSecret');
         $client = new AipFace($appId, $appKey, $appSecret);
         $images = [
-            'http://online-incar.bj.bcebos.com/23427227653161',
-            'http://online-incar.bj.bcebos.com/23427227653206',
+            file_get_contents('http://online-incar.bj.bcebos.com/23427227653161'),
+            file_get_contents('http://online-incar.bj.bcebos.com/23427227653206'),
         ];
 //        $image = file_get_contents(public_path().'/images/a.jpg');
 
