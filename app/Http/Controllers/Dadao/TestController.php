@@ -18,10 +18,20 @@ class TestController extends Controller
     public function test(Request $request){
 
         $imgUrl = "http://bos.bj.baidubce.com/v1/testincar/11.png?authorization=bce-auth-v1%2Fb62d1ebc5fdf4cc6869a6b8e8fe09e30%2F2018-05-30T03%3A49%3A27Z%2F36666666%2F%2F77f56586c5cb0a9bedeb1ddcaca4bc3220ac83b32eac059bc308325031c9293e";
+        $imgUrl = "http://online-incar.bj.bcebos.com/23427227653161";
 
-        $content = file_get_contents($imgUrl);
+        //读取图片内容
+        $imgContent = curl_get($imgUrl);
 
-        dump($content);
+        //写入文件
+        $filePath = public_path().'/upload/user/certificates/';
+        $fileName = time().".jpg";
+        $path = $filePath.$fileName;
+        $ifp = fopen( $path, "wb" );
+        fwrite( $ifp, $imgContent );
+        fclose( $ifp );
+
+        dump($imgContent);
         die;
 
         $appId = config('ai.appId');
@@ -29,8 +39,8 @@ class TestController extends Controller
         $appSecret = config('ai.apiSecret');
         $client = new AipFace($appId, $appKey, $appSecret);
         $images = [
-            file_get_contents(public_path().'/images/a.jpg'),
-            file_get_contents(public_path().'/images/b.jpg'),
+            'http://online-incar.bj.bcebos.com/23427227653161',
+            'http://online-incar.bj.bcebos.com/23427227653206.jpg',
         ];
 //        $image = file_get_contents(public_path().'/images/a.jpg');
 
