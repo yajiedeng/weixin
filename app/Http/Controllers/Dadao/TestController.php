@@ -9,6 +9,7 @@ use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Log;
 use App\Models\User;
 use BaiduFace\Api\AipFace;
@@ -16,6 +17,12 @@ use BaiduFace\Api\AipFace;
 class TestController extends Controller
 {
     public function test(Request $request){
+
+        $exists = Storage::disk('bos')->exists('path/to/file');
+        dump($exists);
+        $content = Storage::disk('bos')->get('path/to/file');
+        dump($content);
+        die;
 
 //        $imgUrl = "http://bos.bj.baidubce.com/v1/testincar/11.png?authorization=bce-auth-v1%2Fb62d1ebc5fdf4cc6869a6b8e8fe09e30%2F2018-05-30T03%3A49%3A27Z%2F36666666%2F%2F77f56586c5cb0a9bedeb1ddcaca4bc3220ac83b32eac059bc308325031c9293e";
 //        $imgUrl = "http://online-incar.bj.bcebos.com/23427227653161";
