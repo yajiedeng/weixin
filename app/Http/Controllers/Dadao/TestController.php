@@ -17,6 +17,13 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
+        $imgUrl = "http://bos.bj.baidubce.com/v1/testincar/11.png?authorization=bce-auth-v1%2Fb62d1ebc5fdf4cc6869a6b8e8fe09e30%2F2018-05-30T03%3A49%3A27Z%2F36666666%2F%2F77f56586c5cb0a9bedeb1ddcaca4bc3220ac83b32eac059bc308325031c9293e";
+
+        $content = file_get_contents($imgUrl);
+
+        dump($content);
+        die;
+
         $appId = config('ai.appId');
         $appKey = config('ai.apiKey');
         $appSecret = config('ai.apiSecret');
