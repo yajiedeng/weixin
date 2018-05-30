@@ -40,7 +40,7 @@ class TestController extends Controller
         $client = new AipFace($appId, $appKey, $appSecret);
         $images = [
             'http://online-incar.bj.bcebos.com/23427227653161',
-            'http://online-incar.bj.bcebos.com/23427227653206.jpg',
+            'http://online-incar.bj.bcebos.com/23427227653206',
         ];
 //        $image = file_get_contents(public_path().'/images/a.jpg');
 
