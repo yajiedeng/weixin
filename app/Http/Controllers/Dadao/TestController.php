@@ -18,7 +18,7 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-        $exists = Storage::disk('bos')->exists('path/to/file');
+        $exists = Storage::disk('bos')->exists('1.jpg');
         dump($exists);
         $content = Storage::disk('bos')->get('path/to/file');
         dump($content);
