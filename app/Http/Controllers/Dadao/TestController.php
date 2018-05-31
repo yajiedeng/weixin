@@ -24,9 +24,8 @@ class TestController extends Controller
         if($file->isValid()){
             // 临时绝对路径
             $realPath = $file->getRealPath();
-
-            $re = Storage::disk('bos')->put($user_id.'name',file_get_contents($realPath));
-            return $re;
+            $re = Storage::disk('bos')->put('name',file_get_contents($realPath));
+            dump($re);
         }else{
             Log::error("文件上传失败");
         }
