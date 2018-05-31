@@ -74,7 +74,7 @@ return [
         ],
 
         'bos' => [
-            'driver' => 'bce',
+            'driver' => 'bos',
             'bucket' => 'testincar',
             'options' => [
                 'credentials' => [
