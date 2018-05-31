@@ -17,8 +17,13 @@ use BaiduFace\Api\AipFace;
 class TestController extends Controller
 {
     public function test(Request $request){
+
+
+
         $file = $request->file('name');
-        return $file;
+        dump($file);
+        die;
+
         //判断文件是否存在
         $exists = Storage::disk('bos')->exists('1.jpg');
         dump($exists);
