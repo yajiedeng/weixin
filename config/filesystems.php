@@ -75,13 +75,13 @@ return [
 
         'bos' => [
             'driver' => 'bos',
-            'bucket' => 'testincar',
+            'bucket' => '',
             'options' => [
                 'credentials' => [
                     'ak' => 'b62d1ebc5fdf4cc6869a6b8e8fe09e30',
                     'sk' => '8a78ce2a503144978ebcf3d389ce1baa',
                 ],
-                'endpoint' => 'http://bj.bcebos.com',
+                'endpoint' => 'http://testincar.bj.bcebos.com',
             ]
         ],
 
