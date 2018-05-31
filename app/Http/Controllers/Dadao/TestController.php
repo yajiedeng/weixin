@@ -18,8 +18,8 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-        $data = Storage::disk('bos')->get('name');
-        return $data;
+//        $data = Storage::disk('bos')->get('name');
+//        return $data;
 
         $file = $request->file('name');
         // 文件是否上传成功
