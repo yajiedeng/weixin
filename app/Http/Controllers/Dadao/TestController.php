@@ -25,10 +25,11 @@ class TestController extends Controller
         // 文件是否上传成功
         if($file->isValid()){
             // 临时绝对路径
+            $name = time();
             $realPath = $file->getRealPath();
-            $re = Storage::disk('bos')->put(time(),file_get_contents($realPath));
+            $re = Storage::disk('bos')->put($name,file_get_contents($realPath));
             if($re){
-                return 'success';
+                return 'success '.$name;
             }else{
                 return 'error';
             }
