@@ -18,12 +18,12 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-        echo "<img src='http://testincar.bj.bcebos.com/1527743632.jpg' />";
-        die;
+//        echo "<img src='http://testincar.bj.bcebos.com/1527743632.jpg' />";
+//        die;
 
-        $data = Storage::disk('bos')->url('1527743632');
-        dump($data);
-        die;
+//        $data = Storage::disk('bos')->url('1527743632');
+//        dump($data);
+//        die;
 ////        //写入文件
 //        $filePath = public_path().'/upload/user/certificates/';
 //        $fileName = time().".jpg";
