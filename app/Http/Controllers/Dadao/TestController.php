@@ -21,7 +21,7 @@ class TestController extends Controller
 //        echo "<img src='http://online-incar.bj.bcebos.com/1527743632' />";
 //        die;
 
-//        $data = Storage::disk('bos')->url('1527743809');
+//        $data = Storage::disk('bos')->url('1527747626');
 //        dump($data);
 //        die;
 ////        //写入文件
