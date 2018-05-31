@@ -18,12 +18,12 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-//        echo "<img src='http://testincar.bj.bcebos.com/1527740220' />";
-//        die;
+        echo "<img src='http://testincar.bj.bcebos.com/1527743632.jpg' />";
+        die;
 
-//        $data = Storage::disk('bos')->url('1527740220');
-//        dump($data);
-//        die;
+        $data = Storage::disk('bos')->url('1527743632');
+        dump($data);
+        die;
 ////        //写入文件
 //        $filePath = public_path().'/upload/user/certificates/';
 //        $fileName = time().".jpg";
@@ -39,7 +39,7 @@ class TestController extends Controller
             // 临时绝对路径
             $name = time();
             $realPath = $file->getRealPath();
-            $re = Storage::disk('bos')->put($name,file_get_contents($realPath));
+            $re = Storage::disk('bos')->put($name,$realPath);
             if($re){
                 return 'success '.$name;
             }else{
