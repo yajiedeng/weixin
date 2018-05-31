@@ -39,7 +39,7 @@ class TestController extends Controller
             // 临时绝对路径
             $name = time();
             $realPath = $file->getRealPath();
-            $re = Storage::disk('bos')->put($name,$realPath);
+            $re = Storage::disk('bos')->upload($name,$realPath);
             if($re){
                 return 'success '.$name;
             }else{
