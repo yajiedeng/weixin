@@ -18,10 +18,10 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-//        echo "<img src='http://online-incar.bj.bcebos.com/1527739728' />";
+//        echo "<img src='http://testincar.bj.bcebos.com/1527740093' />";
 //        die;
 
-//        $data = Storage::disk('bos')->url('1527739728');
+//        $data = Storage::disk('bos')->url('1527740093');
 //        dump($data);
 //        die;
 ////        //写入文件
