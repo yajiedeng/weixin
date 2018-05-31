@@ -21,15 +21,12 @@ class TestController extends Controller
         $data = Storage::disk('bos')->get('name');
         return $data;
 
-        $user_id = 45678;
         $file = $request->file('name');
         // 文件是否上传成功
         if($file->isValid()){
             // 临时绝对路径
             $realPath = $file->getRealPath();
-            $re = Storage::disk('bos')->put('name',file_get_contents($realPath));
-            $data = Storage::disk('bos')->get('name');
-            return $data;
+            $re = Storage::disk('bos')->put(time(),file_get_contents($realPath));
             dump($re);
         }else{
             Log::error("文件上传失败");
