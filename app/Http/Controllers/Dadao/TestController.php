@@ -18,9 +18,19 @@ class TestController extends Controller
 {
     public function test(Request $request){
 
-
-
+        $user_id = 45678;
         $file = $request->file('name');
+        // 文件是否上传成功
+        if($file->isValid()){
+            // 临时绝对路径
+            $realPath = $file->getRealPath();
+
+            $re = Storage::disk('bos')->put($user_id.'name',file_get_contents($realPath));
+            return $re;
+        }else{
+            Log::error("文件上传失败");
+        }
+
         dump($file);
         die;
 
