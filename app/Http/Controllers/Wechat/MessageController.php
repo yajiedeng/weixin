@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Http\Controllers\Qiyu\KefuController;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
@@ -12,15 +14,8 @@ use Illuminate\Support\Facades\DB;
 use Log;
 
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
-    private $app;
-    public function __construct()
-    {
-        //初始化
-        $this->app = app('wechat.official_account');
-    }
-
     /*
      * 处理事件推送消息
      * */
@@ -79,7 +74,11 @@ class MessageController extends Controller
             $msg = $this->app->server->getMessage();
             $keywords = $msg['Content'];//接收关键字
         }
-        $content = DB::table('wx_message')->where('keyword',$keywords)->first();
+        if($keywords == "人工客服"){
+            $qiyu = new KefuController();
+            $qiyu->serve();
+        }
+        $content = Message::where('keyword',$keywords)->first();
         if($content){
             //判断关键字回复类型
             if($content->type == 1){//文本消息
@@ -103,6 +102,9 @@ class MessageController extends Controller
         $message = $this->app->server->getMessage();
         $reg_url = config('wechat_parameter.reg_url');//注册链接
         $senceStr = $message['EventKey'];
+        $openId = $message['FromUserName'];
+        $user = new UserController();
+        $user->getUserInfo($openId);
         if($senceStr){
             Log::info('用户扫码',['key'=>$senceStr]);
             //qrscene_db_42 实例数据
@@ -117,7 +119,7 @@ class MessageController extends Controller
         }
 
         //回复关注后的文本消息
-        $content = DB::table('wx_message')->where('keyword','subscribe')->first();
+        $content = Message::where('keyword','subscribe')->first();
         $content = $content == null ? "" : $content->content;
         $this->resposeText($content);
         //回复一条图文消息

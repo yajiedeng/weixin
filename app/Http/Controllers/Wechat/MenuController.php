@@ -5,15 +5,8 @@ namespace App\Http\Controllers\Wechat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class MenuController extends Controller
+class MenuController extends BaseController
 {
-    private $app;
-
-    public function __construct()
-    {
-        $this->app = app('wechat.official_account');
-    }
-
     /*
      * 获取当前自定义菜单
      * */

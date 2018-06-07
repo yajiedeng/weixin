@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use BaiduFace\Api\AipFace;
+use Godruoyi\LaravelOCR\OCR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Kernel\Messages\Text;
 use App\Models\User;
-use App\Http\Controllers\Wechat\WechatController;
 use Illuminate\Support\Facades\DB;
 use Log;
+use Validator;
 
 class MiniAppController extends Controller
 {
@@ -118,10 +120,169 @@ class MiniAppController extends Controller
 
     /*
      *  小程序验证身份证、驾驶证与真实姓名是否匹配
+     *
+     *  参数说明
+     *  userName 姓名
+     *  identityCardNum 身份证号码
+     *  identityPositivePicture 身份证正面
+     *  identityOppositePicture 身份证反面
+     *  licensePicture 驾驶证正面
+     *  licensePictureCopy 驾驶证反面
+     *  selfie 自拍照
      * */
     public function userValidation()
     {
+        //百度云图片前缀
+        $baidu_bos_url = config('wechat_parameter.bcebos_url');
+        //验证
+        $error = Validator::make(request()->all(), [
+                'userName' => 'required', // 姓名
+                'identityCardNum' => 'required', // 身份证号码
+                'identityPositivePicture' => 'required', // 身份证正面
+                'identityOppositePicture' => 'required', //身份证反面
+                'licensePicture' => 'required', // 驾驶证正面
+                'licensePictureCopy' => 'required', // 驾驶证反面
+                'selfie' => 'required', // 自拍照
+            ],
+            [
+                'required' => ':attribute 该参数必填'
+            ]
+        );
 
+        // 参数有错误 直接返回错误信息
+        if($error->fails()){
+            return responce(400,$error->errors()->first());
+        }
+        $data = request()->all();// 接收所以数据
+        Log::info('验证用户证件参数 .'.json_encode($data));
+        // 业务逻辑
+        $userName = request('userName');
+        $identityCardNum = request('identityCardNum');
+        $identityPositivePicture = request('identityPositivePicture');
+        $identityOppositePicture = request('identityOppositePicture');
+        $licensePicture = request('licensePicture');
+        $licensePictureCopy = request('licensePictureCopy');
+        $selfie = request('selfie');
+
+        // 获取身份证正面信息
+        Log::info('身份证正面链接 '.$baidu_bos_url.$identityPositivePicture);
+        $img = $baidu_bos_url.$identityPositivePicture;
+        $identityPositivePictureInfo = OCR::baidu()->idcard($img,[
+            'detect_direction'      => false,      //是否检测图像朝向
+            'id_card_side'          => 'front',    //front：身份证正面；back：身份证背面 （注意，该参数必选）
+            'detect_risk'           => false,      //是否开启身份证风险类型功能，默认false
+        ]);
+        if(!array_key_exists('error_code',$identityPositivePictureInfo)){
+            $userNameCheck = $identityPositivePictureInfo['words_result']['姓名']['words'];
+            $identityCardNumCheck = $identityPositivePictureInfo['words_result']['公民身份号码']['words'];
+            if($userName != $userNameCheck || $identityCardNum != $identityCardNumCheck){
+                return responce(400,'姓名或身份证号码不匹配');
+            }
+        }else{
+            Log::error("身份证正面信息获取失败 === ".json_encode($identityPositivePictureInfo));
+            return false;
+        }
+
+        // 获取身份证反面信息
+        $img = $baidu_bos_url.$identityOppositePicture;
+        $identityOppositePicturenfo = OCR::baidu()->idcard($img,[
+            'detect_direction'      => false,      //是否检测图像朝向
+            'id_card_side'          => 'back',    //front：身份证正面；back：身份证背面 （注意，该参数必选）
+            'detect_risk'           => false,      //是否开启身份证风险类型功能，默认false
+        ]);
+
+        // 获取驾驶证信息
+        $img = $baidu_bos_url.$licensePicture;
+        $licensePictureInfo = OCR::baidu()->drivingLicense($img);
+        if(!$licensePictureInfo){
+            return responce(400,'驾驶证信息获取失败');
+        }else{
+            $userNameCheck = $licensePictureInfo['words_result']['姓名']['words'];
+            $identityCardNumCheck = $licensePictureInfo['words_result']['证号']['words'];
+            if($userName != $userNameCheck || $identityCardNum != $identityCardNumCheck){
+                return responce(400,'姓名或驾驶证号码不匹配');
+            }
+        }
+
+        $status = 1;
+
+        // 人脸比对
+        $images = [
+            file_get_contents($baidu_bos_url.$identityPositivePicture),
+            file_get_contents($baidu_bos_url.$selfie),
+        ];
+
+        $appId = config('ai.appId');
+        $appKey = config('ai.apiKey');
+        $appSecret = config('ai.apiSecret');
+        $client = new AipFace($appId, $appKey, $appSecret);
+        // 调用人脸检测
+        $data = $client->match($images);
+        if(!array_key_exists('error_code',$data)){
+            $degree = $data['result'][0]['score']; // 人脸比对结果
+        }else{
+            Log::info("人脸对比失败 === ".json_encode($data));
+            return false;
+        }
+
+        $data['degree'] = $degree;
+        $data['status'] = $status;
+        $data['identityPositiveInfoJsonStr'] = $identityPositivePictureInfo;
+        $data['identityOppositeInfoJsonStr'] = $identityOppositePicturenfo;
+        $data['licenseInfoJsonStr'] = $licensePictureInfo;
+
+        return responce(200,"success",$data);
+    }
+
+    /*
+     * 人脸比对
+     * */
+    public function faceMatch($images)
+    {
+        $appId = config('ai.appId');
+        $appKey = config('ai.apiKey');
+        $appSecret = config('ai.apiSecret');
+        $client = new AipFace($appId, $appKey, $appSecret);
+        // 调用人脸检测
+        $data = $client->match($images);
+        if(!array_key_exists('error_code',$data)){
+            return $data['result'][0]['score'];
+        }else{
+            Log::info("人脸对比失败 === ".json_encode($data));
+            return false;
+        }
+    }
+
+    /*
+     *  获取身份证图片信息内容
+     * */
+    public function getidentityCardNumInfo($img,$id_card_side = 'front')
+    {
+        $re = OCR::baidu()->idcard($img,[
+            'detect_direction'      => false,      //是否检测图像朝向
+            'id_card_side'          => $id_card_side,    //front：身份证正面；back：身份证背面 （注意，该参数必选）
+            'detect_risk'           => false,      //是否开启身份证风险类型功能，默认false
+        ]);
+        if(!array_key_exists('error_code',$re)){
+            return $re['words_result'];
+        }else{
+            Log::error("身份证正面信息获取失败 === ".json_encode($re));
+            return false;
+        }
+    }
+
+    /*
+     *  获取驾驶证图片信息内容
+     * */
+    public function getlicensePictureInfo($img)
+    {
+        $re = OCR::baidu()->drivingLicense($img);
+        if(!array_key_exists('error_code',$re)){
+            return $re['words_result'];
+        }else{
+            Log::info("驾驶证信息获取失败 === ".json_encode($re));
+            return false;
+        }
     }
 
     /*

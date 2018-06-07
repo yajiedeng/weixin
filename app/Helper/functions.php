@@ -45,20 +45,54 @@ function curl_post($url, $params = array())
     return ($data);
 }
 
+function request_post($url = '', $param = '')
+{
+    if (empty($url) || empty($param)) {
+        return false;
+    }
+
+    $postUrl = $url;
+    $curlPost = $param;
+    // 初始化curl
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $postUrl);
+    curl_setopt($curl, CURLOPT_HEADER, 0);
+    // 要求结果为字符串且输出到屏幕上
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    // post提交方式
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+    // 运行curl
+    $data = curl_exec($curl);
+    curl_close($curl);
+
+    return $data;
+}
+
 /*
  * 定义接口返回格式
  * */
 
 function responce($code='200',$msg='ok',$result='')
 {
-    $data = [
-        'code' => (string)$code,
-        'msg'  => (string)$msg,
-        'data' => (string)$result
-    ];
-    if($result === null){
-        unset($data['data']);
+    if($result){
+        $data = [
+            'code' => (string)$code,
+            'msg'  => (string)$msg,
+            'data' => $result
+        ];
+    }else{
+        $data = [
+            'code' => (string)$code,
+            'msg'  => (string)$msg,
+            'data' => (string)$result
+        ];
     }
+
+//    if($result === null){
+//        unset($data['data']);
+//    }
     return response()->json($data);
 }
 
@@ -71,4 +105,23 @@ function getUrl()
 {
     $url = url()->previous();
     return $url;
+}
+
+/*
+ *  小程序验证用户证件 转存
+ * */
+
+function writeImg($imgUrl,$fileName)
+{
+    $baidu_bos_url = config('wechat_parameter.bcebos_url');
+    //读取图片内容
+    $imgContent = curl_get($baidu_bos_url.$imgUrl);
+    //写入文件
+    $filePath = public_path().'/upload/user/';
+    $fileName = $fileName.".jpg";
+    $path = $filePath.$fileName;
+    $ifp = fopen( $path, "wb" );
+    $res = fwrite( $ifp, $imgContent );
+    fclose( $ifp );
+    return $res;
 }

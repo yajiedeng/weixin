@@ -6,15 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Log;
 
-class WechatController extends Controller
+class WechatController extends BaseController
 {
-    private $app;
-    public function __construct()
-    {
-        //初始化
-        $this->app = app('wechat.official_account');
-    }
-
     public function serve(Request $request)
     {
         //请求方式
@@ -57,7 +50,6 @@ class WechatController extends Controller
 
     /*
      * 生成二维码
-     * @ $type 二维码类型 1是临时二维码 2是永久二维码 默认是2
      * @ $sence_id 二维码参数
      * */
     public function createQrCode($sence_id)

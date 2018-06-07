@@ -20,14 +20,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //微信路由组
 Route::group(['namespace' => 'Wechat'], function(){
-    Route::any('/wechat','WechatController@serve');
-    Route::any('/miniapp','MiniAppController@serve');
-    Route::post('/program/openid/put','MiniAppController@getOpenid');
-    Route::post('/carqrcode/add','MiniAppController@createCarQrCode');
-    Route::post('/car/get/plates','MiniAppController@getPlateNumber');
+    Route::any('/wechat','WechatController@serve'); // 公众号接收消息 & 事件 地址
+    Route::get('menus',"MenuController@meunList"); // 查询公众号自定菜单
+    Route::post('menus/add',"MenuController@addMenu"); // 添加公众号自定义菜单
+    Route::post('menus/delete',"MenuController@deleteMenu"); // 删除公众号自定义菜单
+    Route::get('/users',"UserController@getUserList"); // 获取关注用户列表
+    Route::get('/users/old',"UserController@oldUserInfo"); // 获取关注用户列表
+
+
+
+
+//    Route::any('/miniapp','MiniAppController@serve'); // 小程序接收消息 & 事件 地址
+//    Route::post('/program/openid/put','MiniAppController@getOpenid'); // 小程序获取 openid
+//    Route::post('/carqrcode/add','MiniAppController@createCarQrCode'); // 小程序生成车辆二维码
+//    Route::post('/car/get/plates','MiniAppController@getPlateNumber'); // 小程序获取车牌号
+//    Route::post('/user/validate','MiniAppController@userValidation'); // 小程序验证用户证件信息
 });
 
+// 七鱼客服
+Route::any('/qiyu',"Qiyu\KefuController@serve");
+
 Route::any('test',"Dadao\TestController@test");
-Route::get('menus',"Wechat\MenuController@meunList");
-Route::post('menus/add',"Wechat\MenuController@addMenu");
-Route::post('menus/delete',"Wechat\MenuController@deleteMenu");

@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'PRC',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'zh',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,8 +176,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Godruoyi\LaravelOCR\OCRServiceProvider::class,
-        Hinet\Baidu\BaiduServiceProvider::class,
 
     ],
 
@@ -227,7 +225,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'OCR' => Godruoyi\LaravelOCR\OCR::class,
 
     ],
 
