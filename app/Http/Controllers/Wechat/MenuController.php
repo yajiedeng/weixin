@@ -30,13 +30,8 @@ class MenuController extends BaseController
         $zhima_url = config('wechat_parameter.zhima_url');// 芝麻信用页面链接
         $buttons = [
             [
-                "type" => "view",
-                "name" => "APP下载",
-                "url"  => $reg_url
-            ],
-            [
-                "name"       => "马上用车",
-                "sub_button" => [
+                "name" => "用车指南",
+                "sub_button"  =>[
                     [
                         "type" => "view",
                         "name" => "领取礼包",
@@ -52,11 +47,27 @@ class MenuController extends BaseController
                         "name" => "Q&A",
                         "url" => "http://mp.weixin.qq.com/s?__biz=MzUxMzQ2OTkzMw==&mid=100000010&idx=1&sn=554a66a3b743fbd133ca8e4ca7d65f50&chksm=7955fd884e22749e9b373e12b023a61b78a18747771aafa44d5072b61e8f566bd614bd48fd57&scene=18#wechat_redirect"
                     ],
-                ],
+                    [
+                        "type" => "view",
+                        "name" => "APP下载",
+                        "url"  => $reg_url
+                    ],
+                ]
+            ],
+            [
+                'type' => 'miniprogram',
+                "name"       => "点我用车",
+                "appid"       => "wxfb0337c363785641",
+                "pagepath"       => "/pages/index/index",
             ],
             [
                 "name"       => "为您服务",
                 "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "",
+                        "url"  => "http://invite.mydadao.com/Illegal.html"
+                    ],
                     [
                         "type" => "click",
                         "name" => "客服热线",

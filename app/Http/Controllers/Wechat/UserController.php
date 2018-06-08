@@ -64,7 +64,10 @@ class UserController extends BaseController
         $userList = $this->app->user->list();
         foreach ($userList['data']['openid'] as $openid){
             $res = $this->getUserInfo($openid);
-            echo $res."<br/>";
+            if($res){
+                $msg[$openid] = "ok";
+            }
         }
+        return $msg;
     }
 }
