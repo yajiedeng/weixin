@@ -60,7 +60,7 @@ class MenuController extends BaseController
                     [
                         "type" => "view",
                         "name" => "芝麻信用认证",
-                        "key"  => $zhima_url
+                        "key"  => "https://wecha-oa-dev.mydaado.com/zhima"
                     ],
                     [
                         "type" => "click",
@@ -70,7 +70,7 @@ class MenuController extends BaseController
                     [
                         "type" => "view",
                         "name" => "违章处理",
-                        "url"  => "http://invite.mydadao.com/Illegal"
+                        "url"  => "http://invite.mydadao.com/Illegal.html"
                     ],
                 ],
             ],
