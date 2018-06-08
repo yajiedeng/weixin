@@ -58,7 +58,8 @@ class MenuController extends BaseController
                 'type' => 'miniprogram',
                 "name"       => "点我用车",
                 "url" => $reg_url,
-                "appid"       => "wxfb0337c363785641",
+//                "appid"       => "wxfb0337c363785641",
+                "appid"       => "wx77fbe29bd53bc39b",
                 "pagepath"       => "/pages/index/index",
             ],
             [
