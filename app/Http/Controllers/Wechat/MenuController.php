@@ -64,11 +64,6 @@ class MenuController extends BaseController
                 "name"       => "为您服务",
                 "sub_button" => [
                     [
-                        "type" => "view",
-                        "name" => "",
-                        "url"  => "http://invite.mydadao.com/Illegal.html"
-                    ],
-                    [
                         "type" => "click",
                         "name" => "客服热线",
                         "key"  => "kefurexian"
