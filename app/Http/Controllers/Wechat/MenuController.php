@@ -60,7 +60,7 @@ class MenuController extends BaseController
                     [
                         "type" => "view",
                         "name" => "芝麻信用认证",
-                        "key"  => "https://wecha-oa-dev.mydaado.com/zhima"
+                        "key"  => "http://wechat.qihuapp.com/zhima"
                     ],
                     [
                         "type" => "click",
