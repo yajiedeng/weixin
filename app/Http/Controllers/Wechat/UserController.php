@@ -23,7 +23,7 @@ class UserController extends BaseController
         }
         // 存储公众号用户信息
         $users['wechat_openid'] = $userInfo['openid'];
-        if($userInfo['unionid']){
+        if(array_key_exists('unionid',$userInfo) && $userInfo['unionid']){
             $users['unionid'] = $userInfo['unionid'];
         }
         $users['nickname'] = $userInfo['nickname'];
