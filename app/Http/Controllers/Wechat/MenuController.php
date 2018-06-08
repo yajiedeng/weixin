@@ -58,11 +58,6 @@ class MenuController extends BaseController
                 "name"       => "为您服务",
                 "sub_button" => [
                     [
-                        "type" => "view",
-                        "name" => "芝麻信用认证",
-                        "key"  => "http://wechat.qihuapp.com/zhima"
-                    ],
-                    [
                         "type" => "click",
                         "name" => "客服热线",
                         "key"  => "kefurexian"
