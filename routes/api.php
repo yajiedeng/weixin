@@ -22,8 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Wechat'], function(){
     Route::any('/wechat','WechatController@serve'); // 公众号接收消息 & 事件 地址
     Route::get('menus',"MenuController@meunList"); // 查询公众号自定菜单
-    Route::post('menus/add',"MenuController@addMenu"); // 添加公众号自定义菜单
-    Route::post('menus/delete',"MenuController@deleteMenu"); // 删除公众号自定义菜单
+    Route::post('/menus/add',"MenuController@addMenu"); // 添加公众号自定义菜单
+    Route::post('/menus/delete',"MenuController@deleteMenu"); // 删除公众号自定义菜单
     Route::get('/users',"UserController@getUserList"); // 获取关注用户列表
     Route::get('/users/old',"UserController@oldUserInfo"); // 获取关注用户列表
 

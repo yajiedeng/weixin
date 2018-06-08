@@ -70,7 +70,7 @@ class MenuController extends BaseController
                     [
                         "type" => "view",
                         "name" => "违章处理",
-                        "url"  => "http://invite.mydadao.com/Illegal.html"
+                        "url"  => "http://invite.mydadao.com/Illegal"
                     ],
                 ],
             ],
