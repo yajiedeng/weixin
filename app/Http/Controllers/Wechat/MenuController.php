@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Wechat;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Log;
 
 class MenuController extends BaseController
 {
@@ -25,7 +25,6 @@ class MenuController extends BaseController
             responce(404,'not found');
             die;
         }
-
         $reg_url = config('wechat_parameter.reg_url');// 用户注册链接
         $zhima_url = config('wechat_parameter.zhima_url');// 芝麻信用页面链接
         $buttons = [
@@ -58,8 +57,7 @@ class MenuController extends BaseController
                 'type' => 'miniprogram',
                 "name"       => "点我用车",
                 "url" => $reg_url,
-//                "appid"       => "wxfb0337c363785641",
-                "appid"       => "wx77fbe29bd53bc39b",
+                "appid"       => "wxfb0337c363785641",
                 "pagepath"       => "/pages/index/index",
             ],
             [
@@ -68,7 +66,7 @@ class MenuController extends BaseController
                     [
                         "type" => "view",
                         "name" => "芝麻信用认证",
-                        "url"  => "http://invite.mydadao.com/Illegal.html"
+                        "url"  => $zhima_url
                     ],
                     [
                         "type" => "click",
@@ -97,6 +95,5 @@ class MenuController extends BaseController
         }else{
             responce(404,'not found');
         }
-
     }
 }

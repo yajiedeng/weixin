@@ -111,16 +111,16 @@ function getUrl()
  *  小程序验证用户证件 转存
  * */
 
-function writeImg($imgUrl,$fileName)
+function writeImg($imgContent,$fileName)
 {
-    $baidu_bos_url = config('wechat_parameter.bcebos_url');
+//    $baidu_bos_url = config('wechat_parameter.bcebos_url');
     //读取图片内容
-    $imgContent = curl_get($baidu_bos_url.$imgUrl);
+//    $imgContent = curl_get($baidu_bos_url.$imgUrl);
     //写入文件
-    $filePath = public_path().'/upload/user/';
-    $fileName = $fileName.".jpg";
-    $path = $filePath.$fileName;
-    $ifp = fopen( $path, "wb" );
+//    $filePath = public_path().'/upload/user/';
+//    $fileName = $fileName.".jpg";
+//    $path = $filePath.$fileName;
+    $ifp = fopen( $fileName, "wb" );
     $res = fwrite( $ifp, $imgContent );
     fclose( $ifp );
     return $res;

@@ -26,7 +26,8 @@ Route::group(['namespace' => 'Wechat'], function(){
     Route::post('/menus/delete',"MenuController@deleteMenu"); // 删除公众号自定义菜单
     Route::get('/users',"UserController@getUserList"); // 获取关注用户列表
     Route::get('/users/old',"UserController@oldUserInfo"); // 获取关注用户列表
-
+    Route::post('/qrcodes/add',"QrCodeController@createCarQrCodes"); // 获取关注用户列表
+    Route::post('/license/log',"QrCodeController@createCarQrCodes"); // 导入车牌号日志
 
 
 

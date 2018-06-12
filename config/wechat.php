@@ -59,10 +59,16 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wxe52d47b93aeae351'),         // AppID
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '3d779bed0bc68ec450749709e9c4324d'),    // AppSecret
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx70908f4cadede4c8'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '935226ce5aaad3262e6ce4a8564334ac'),    // AppSecret
             'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'mydadaotest'),           // Token
-            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', 'qzoX56ojEkSzFR9yDlCLii14mAVKLSnHTW2ZwHwL3Sq'),                 // EncodingAESKey
+            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', 'tW9Xn6fueFPaoSglMawW7pLsbgSqP4Cq4U0FF1FUP4R'),                 // EncodingAESKey
+
+
+//            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx9ec2bd28177b3153'),         // AppID
+//            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'b18496e3beb2c8ff8f67df386336678d'),    // AppSecret
+//            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'mydadao'),           // Token
+//            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', 'JmwNjLYX6SK14Anpg6XulB0VEDyKJmLSGcXWHMMLOxk'),                 // EncodingAESKey
 
             /*
              * OAuth 配置
@@ -94,10 +100,10 @@ return [
      */
      'mini_program' => [
          'default' => [
-             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wx77fbe29bd53bc39b'),
-             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'a6dbc6066d58bfc0bc1581daff21d773'),
+             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', 'wxfb0337c363785641'),
+             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', 'e68169e72bb6d73bc43e83952dc68f44'),
              'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', 'miniapp'),
-             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', 'G89w32CpNvCaneKvpiwpizRWO0BTqzo5QOt3qvZbpgm'),
+             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', 'hI5amhuuBI1yL4AWNnFCnb4g7JliNPEraiTjHM0kUS6'),
          ],
      ],
 
